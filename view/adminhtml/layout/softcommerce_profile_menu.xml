@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="admin.scope.col.wrap" htmlClass="accordion" />
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Template" name="adminhtml.profile.navigation.container" template="SoftCommerce_Profile::profile/navigation/container.phtml" before="-"/>
+        </referenceContainer>
+        <referenceBlock name="adminhtml.profile.navigation.container">
+            <block class="SoftCommerce\Profile\Block\Adminhtml\Profile\Navigation" name="adminhtml.profile.navigation" template="SoftCommerce_Profile::profile/navigation.phtml" after="adminhtml.system.config.switcher">
+                <arguments>
+                    <argument name="menu_items" xsi:type="array">
+                        <item name="history" xsi:type="string">softcommerce/profileHistory</item>
+                        <item name="schedules" xsi:type="string">softcommerce/profileSchedule</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

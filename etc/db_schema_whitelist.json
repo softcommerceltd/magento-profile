@@ -1,0 +1,18 @@
+{
+    "softcommerce_profile_entity": {
+        "column": {
+            "entity_id": true,
+            "type_id": true,
+            "name": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "SOFTCOMMERCE_PROFILE_ENTITY_TYPE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "SOFTCOMMERCE_PROFILE_ENTITY_TYPE_ID": true
+        }
+    }
+}

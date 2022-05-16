@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- profile ::: interface | repository | management -->
+    <preference for="SoftCommerce\Profile\Api\Data\ProfileInterface" type="SoftCommerce\Profile\Model\Profile"/>
+    <preference for="SoftCommerce\Profile\Api\Data\Profile\SearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="SoftCommerce\Profile\Api\ProfileRepositoryInterface" type="SoftCommerce\Profile\Model\ProfileRepository"/>
+    <preference for="SoftCommerce\Profile\Model\TypeInstanceOptionsInterface" type="SoftCommerce\Profile\Model\TypeInstanceOptions"/>
+    <preference for="SoftCommerce\Profile\Model\RegistryLocatorInterface" type="SoftCommerce\Profile\Model\RegistryLocator"/>
+    <preference for="SoftCommerce\Profile\Model\GetProfileDataInterface" type="SoftCommerce\Profile\Model\GetProfileData"/>
+    <preference for="SoftCommerce\Profile\Model\GetProfileDataByTypeIdInterface" type="SoftCommerce\Profile\Model\GetProfileDataByTypeId"/>
+    <preference for="SoftCommerce\Profile\Model\GetProfileTypeIdInterface" type="SoftCommerce\Profile\Model\GetProfileTypeId"/>
+    <!-- profile types -->
+    <preference for="SoftCommerce\Profile\Model\ProfileTypes\ConfigInterface" type="SoftCommerce\Profile\Model\ProfileTypes\Config"/>
+    <virtualType name="SoftCommerce\Profile\Model\ProfileTypes\Config\Data" type="Magento\Framework\Config\Data">
+        <arguments>
+            <argument name="reader" xsi:type="object">SoftCommerce\Profile\Model\ProfileTypes\Config\Reader\Virtual</argument>
+            <argument name="cacheId" xsi:type="string">profile_type_config</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SoftCommerce\Profile\Model\ProfileTypes\Config\Reader\Virtual" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">SoftCommerce\Profile\Model\ProfileTypes\Config\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">SoftCommerce\Profile\Model\ProfileTypes\Config\SchemaLocator\Virtual</argument>
+            <argument name="fileName" xsi:type="string">profile_type.xml</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/profile" xsi:type="string">typeId</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SoftCommerce\Profile\Model\ProfileTypes\Config\SchemaLocator\Virtual" type="Magento\Framework\Config\GenericSchemaLocator">
+        <arguments>
+            <argument name="moduleName" xsi:type="string">SoftCommerce_Profile</argument>
+            <argument name="schema" xsi:type="string">profile_type.xsd</argument>
+        </arguments>
+    </virtualType>
+    <type name="SoftCommerce\Profile\Model\ProfileTypes\Config">
+        <arguments>
+            <argument name="config" xsi:type="object">SoftCommerce\Profile\Model\ProfileTypes\Config\Data</argument>
+        </arguments>
+    </type>
+    <!-- Profile UI list-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="softcommerce_profile_listing_data_source" xsi:type="string">SoftCommerce\Profile\Model\ResourceModel\Profile\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="SoftCommerce\Profile\Model\ResourceModel\Profile\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">softcommerce_profile_entity</argument>
+            <argument name="resourceModel" xsi:type="string">SoftCommerce\Profile\Model\ResourceModel\Profile</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="SoftCommerce\Profile\Api\Data\ProfileInterface" xsi:type="string">SoftCommerce\Profile\Api\ProfileRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="SoftCommerce\Profile\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">softcommerce_profile_entity</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- profile queue ::: interface | repository | management -->
+    <preference for="SoftCommerce\Profile\Model\QueueProcessorInterface" type="SoftCommerce\Profile\Model\QueueProcessor"/>
+</config>

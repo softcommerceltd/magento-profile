@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="profileTypes">
+        <xs:attribute name="typeId" type="xs:string" use="required"/>
+        <xs:attribute name="label" type="xs:string" use="required"/>
+        <xs:attribute name="router" type="xs:string" use="required"/>
+        <xs:attribute name="queueRouter" type="xs:string"/>
+        <xs:attribute name="instance" type="xs:string" use="required"/>
+        <xs:attribute name="crontabGroup" type="xs:string" use="required"/>
+        <xs:attribute name="crontabInstance" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="profile" type="profileTypes" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="uniqueTypeName">
+            <xs:annotation>
+                <xs:documentation>Profile type ID must be unique.</xs:documentation>
+            </xs:annotation>
+            <xs:selector xpath="profile" />
+            <xs:field xpath="@typeId" />
+        </xs:unique>
+    </xs:element>
+</xs:schema>

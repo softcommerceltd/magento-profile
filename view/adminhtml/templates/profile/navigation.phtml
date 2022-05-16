@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © Soft Commerce Ltd. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/** @var \SoftCommerce\Profile\Block\Adminhtml\Profile\Navigation $block */
+?>
+
+<?php if ($items = $block->getMenuItems()): ?>
+    <div class="store-switcher store-view <?= $block->escapeHtml($block->getPaddingClass()) ?>">
+        <i class="fas fa-ellipsis-v pl-2"></i>
+        <div class="actions dropdown closable">
+            <button
+                type="button"
+                class="admin__action-dropdown"
+                data-mage-init='{"dropdown":{}}'
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                id="profile-change-button">
+                <?= $block->escapeHtml($block->getTitle()) ?>
+            </button>
+            <ul class="dropdown-menu" data-role="profile-list">
+                <?php foreach ($items as $item): ?>
+                    <li class="store-switcher-all">
+                        <a href="<?= $item['url'] ?? '#' ?>" target="_blank">
+                            <?= $block->escapeHtml($item['name']) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>

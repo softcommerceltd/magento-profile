@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="SoftCommerce_Core::softcommerce_core">
+                    <resource id="SoftCommerce_Profile::profile_core" title="SoftCommerce Profile" translate="title" sortOrder="20">
+                        <resource id="SoftCommerce_Profile::profile" title="Manage Profile" translate="title" sortOrder="10"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="SoftCommerce_Profile::system_config" title="SoftCommerce Core" translate="title" sortOrder="101"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

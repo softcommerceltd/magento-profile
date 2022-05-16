@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">softcommerce_profile_form.softcommerce_profile_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <label translate="true">Profile Information</label>
+        <dataScope>data</dataScope>
+        <namespace>softcommerce_profile_form</namespace>
+        <deps>
+            <dep>softcommerce_profile_form.softcommerce_profile_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="back">
+                <url path="softcommerce/profile/index"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+            <button name="reset">
+                <class>reset</class>
+                <label translate="true">Reset</label>
+            </button>
+            <button name="save" class="SoftCommerce\Profile\Ui\Component\Control\Profile\SaveSplitButton"/>
+        </buttons>
+    </settings>
+    <dataSource name="softcommerce_profile_form_data_source" component="Magento_Ui/js/form/provider">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="softcommerce/profile/save"/>
+        </settings>
+        <dataProvider class="SoftCommerce\Profile\Ui\DataProvider\Profile\Form\InitialProfileDataProvider" name="softcommerce_profile_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="profile_entity">
+        <settings>
+            <label translate="true">Profile Setting</label>
+            <dataScope>profile_entity</dataScope>
+            <componentType>fieldset</componentType>
+        </settings>
+        <field name="entity_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">profile_entity</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>entity_id</dataScope>
+            </settings>
+        </field>
+        <field name="status" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">profile_entity</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <scopeLabel>[global]</scopeLabel>
+                <label translate="true">Enable Profile</label>
+                <dataType>boolean</dataType>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">profile_entity</item>
+                </item>
+            </argument>
+            <settings>
+                <scopeLabel>[global]</scopeLabel>
+                <label translate="true">Name</label>
+                <dataType>text</dataType>
+                <dataScope>name</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="type_id" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">profile_entity</item>
+                </item>
+            </argument>
+            <settings>
+                <scopeLabel>[global]</scopeLabel>
+                <label translate="true">Profile Type</label>
+                <dataType>text</dataType>
+                <dataScope>type_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="SoftCommerce\Profile\Model\Source\ProfileType"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

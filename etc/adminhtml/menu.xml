@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="SoftCommerce_Profile::profile_core"
+             title="Profiles"
+             translate="title"
+             module="SoftCommerce_Profile"
+             sortOrder="0"
+             parent="SoftCommerce_Core::softcommerce_core"
+             resource="SoftCommerce_Profile::profile_core"/>
+        <add id="SoftCommerce_Profile::profile"
+             title="Manage Profiles"
+             translate="title"
+             module="SoftCommerce_Profile"
+             sortOrder="0"
+             parent="SoftCommerce_Profile::profile_core"
+             action="softcommerce/profile/index"
+             resource="SoftCommerce_Profile::profile"/>
+        <add id="SoftCommerce_Profile::core_config"
+             title="Profile Settings"
+             translate="title"
+             module="SoftCommerce_Profile"
+             sortOrder="10"
+             parent="SoftCommerce_Core::config"
+             action="adminhtml/system_config/edit/section/softcommerce_profile/"
+             resource="SoftCommerce_Profile::core_config"/>
+    </menu>
+</config>

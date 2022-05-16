@@ -1,0 +1,14 @@
+<!--
+/**
+ * Copyright © Soft Commerce Ltd. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<div class="admin__field-service">
+    <input type="checkbox"
+           class="admin__control-checkbox --plenty--"
+           attr="id: $data.uid + '_default', name: inputNameUseDefault"
+           ko-checked="isUseDefault"
+           ko-disabled="$data.serviceDisabled">
+    <label translate="'Use Default Value'" attr="for: $data.uid + '_default'" class="admin__field-label"></label>
+</div>
