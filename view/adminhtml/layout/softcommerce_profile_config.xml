@@ -23,8 +23,8 @@
             <block class="Magento\Backend\Block\Template" name="js.system_config_js" template="Magento_Config::system/config/js.phtml"/>
         </referenceContainer>
         <!-- referenceContainer name="content">
-            <container name="adminhtml.freeagent.profile.edit.wrapper" htmlTag="div" htmlClass="admin__scope-old">
-                <block class="SoftCommerce\FreeAgentCore\Block\Adminhtml\Profile\Edit" name="freeagent.profile.config.edit"/>
+            <container name="adminhtml.plenty.profile.edit.wrapper" htmlTag="div" htmlClass="admin__scope-old">
+                <block class="SoftCommerce\PlentyClient\Block\Adminhtml\Profile\Edit" name="plenty.profile.config.edit"/>
             </container>
         </referenceContainer -->
     </body>
