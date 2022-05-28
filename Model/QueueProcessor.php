@@ -98,9 +98,6 @@ class QueueProcessor extends QueueProcessor\AbstractProcessor implements QueuePr
         $this->initialize();
 
         foreach ($this->queues as $entity => $queue) {
-            // var_dump('------------ $queue $entity >> ' . $entity);
-            // var_dump('profile type >>> ' . $this->getProfileEntity()->getTypeId());
-
             try {
                 $queue->execute();
             } catch (\Exception $e) {
