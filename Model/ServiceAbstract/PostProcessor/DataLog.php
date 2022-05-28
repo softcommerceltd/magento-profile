@@ -23,6 +23,8 @@ use SoftCommerce\ProfileConfig\Model\Config\LogConfigInterfaceFactory;
  */
 class DataLog extends Service implements ProcessorInterface
 {
+    private const REQUEST = '__REQUEST__';
+    private const RESPONSE = '__RESPONSE__';
     /**
      * @var LogProcessorInterface
      */
@@ -67,7 +69,13 @@ class DataLog extends Service implements ProcessorInterface
         if ($this->logConfig()->isActiveRequestLog()
             && $request = $this->getContext()->getRequestStorage()->getData()
         ) {
-            $this->logger->execute($this->getContext()->getTypeId(), $request);
+            $this->logger->execute($this->getContext()->getTypeId(), [self::REQUEST => $request]);
+        }
+
+        if ($this->logConfig()->isActiveResponseLog()
+            && $response = $this->getContext()->getResponseStorage()->getData()
+        ) {
+            $this->logger->execute($this->getContext()->getTypeId(), [self::RESPONSE => $response]);
         }
     }
 

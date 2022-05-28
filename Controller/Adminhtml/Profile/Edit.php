@@ -29,7 +29,7 @@ class Edit extends ProfileController implements HttpGetActionInterface
     {
         $profile = $this->initCurrentProfile();
         if ($id = $this->getRequest()->getParam('id')) {
-            $profileUrl = $this->typeInstanceFactory->getRouter($profile);
+            $profileUrl = $this->typeInstanceOptions->getRouter($profile);
             $resultRedirect = $this->resultRedirectFactory->create();
             return $resultRedirect->setPath(
                 "$profileUrl/edit",

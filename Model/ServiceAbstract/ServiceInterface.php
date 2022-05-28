@@ -31,20 +31,20 @@ interface ServiceInterface
      */
     public function getDataStorage(): DataStorageInterface;
 
-    /**
-     * @return DataStorageInterface
-     */
-    public function getRequestStorage(): DataStorageInterface;
-
-    /**
-     * @return DataStorageInterface
-     */
-    public function getResponseStorage(): DataStorageInterface;
-
-    /**
-     * @return MessageStorageInterface
-     */
+     /**
+      * @return MessageStorageInterface
+      */
     public function getMessageStorage(): MessageStorageInterface;
+
+    /**
+     * @return DataStorageInterface
+     */
+    public function getRequestStorage();
+
+    /**
+     * @return DataStorageInterface
+     */
+    public function getResponseStorage();
 
     /**
      * @return int

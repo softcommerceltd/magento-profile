@@ -47,12 +47,12 @@ abstract class Service
     /**
      * @var DataStorageInterface
      */
-    private $dataStorage;
+    protected $dataStorage;
 
     /**
      * @var DataStorageInterface
      */
-    private $responseStorage;
+    protected $responseStorage;
 
     /**
      * @var DataStorageInterface
@@ -167,9 +167,17 @@ abstract class Service
     }
 
     /**
+     * @return MessageStorageInterface
+     */
+    public function getMessageStorage(): MessageStorageInterface
+    {
+        return $this->messageStorage;
+    }
+
+    /**
      * @return DataStorageInterface
      */
-    public function getRequestStorage(): DataStorageInterface
+    public function getRequestStorage()
     {
         return $this->requestStorage;
     }
@@ -177,17 +185,9 @@ abstract class Service
     /**
      * @return DataStorageInterface
      */
-    public function getResponseStorage(): DataStorageInterface
+    public function getResponseStorage()
     {
         return $this->responseStorage;
-    }
-
-    /**
-     * @return MessageStorageInterface
-     */
-    public function getMessageStorage(): MessageStorageInterface
-    {
-        return $this->messageStorage;
     }
 
     /**

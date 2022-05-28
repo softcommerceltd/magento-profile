@@ -72,7 +72,7 @@ class SwitchProfileFormButton implements ButtonProviderInterface
     ) {
         $this->getProfileDataByTypeId = $getProfileDataByTypeId;
         $this->request = $request;
-        $this->$typeInstanceOptions = $typeInstanceOptions;
+        $this->typeInstanceOptions = $typeInstanceOptions;
         $this->urlBuilder = $urlBuilder;
         $this->fontName = $fontName;
         $this->label = $label;
