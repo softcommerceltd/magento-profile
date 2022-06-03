@@ -34,7 +34,6 @@ class Converter implements ConverterInterface
             $data['router'] = $this->getNodeValue($typeNode, 'router');
             $data['queue_router'] = $this->getNodeValue($typeNode, 'queueRouter');
             $data['crontab_group'] = $this->getNodeValue($typeNode, 'crontabGroup');
-            $data['crontab_instance'] = $this->getNodeValue($typeNode, 'crontabInstance');
             $output['types'][$typeId] = $data;
         }
 
@@ -47,7 +46,7 @@ class Converter implements ConverterInterface
      * @param string|null $default
      * @return null|string
      */
-    private function getNodeValue(\DOMNode $input, $attributeName, $default = null)
+    private function getNodeValue(\DOMNode $input, string $attributeName, ?string $default = null)
     {
         $node = $input->attributes->getNamedItem($attributeName);
         return $node ? $node->nodeValue : $default;
