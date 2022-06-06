@@ -64,31 +64,6 @@
                 <dataScope>entity_id</dataScope>
             </settings>
         </field>
-        <field name="status" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">profile_entity</item>
-                    <item name="default" xsi:type="number">1</item>
-                </item>
-            </argument>
-            <settings>
-                <scopeLabel>[global]</scopeLabel>
-                <label translate="true">Enable Profile</label>
-                <dataType>boolean</dataType>
-                <dataScope>status</dataScope>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="number">0</map>
-                            <map name="true" xsi:type="number">1</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
         <field name="name" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

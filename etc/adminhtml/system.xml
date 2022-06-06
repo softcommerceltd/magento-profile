@@ -22,7 +22,7 @@
                 <label>Profile Settings</label>
                 <field id="history_lifetime" translate="label" type="text" sortOrder="3" showInDefault="1">
                     <label>Profile history lifetime</label>
-                    <comment>Number of days a profile history should be kept for. Default: 14 days</comment>
+                    <comment>Number of days a profile history should be kept for. Default: 7 days</comment>
                 </field>
             </group>
         </section>
