@@ -34,18 +34,14 @@ class Navigation extends Template
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
      * @param Template\Context $context
      * @param array $data
-     * @param JsonHelper|null $jsonHelper
-     * @param DirectoryHelper|null $directoryHelper
      */
     public function __construct(
         TypeInstanceOptionsInterface $typeInstanceOptions,
         Template\Context $context,
-        array $data = [],
-        ?JsonHelper $jsonHelper = null,
-        ?DirectoryHelper $directoryHelper = null
+        array $data = []
     ) {
         $this->typeInstanceOptions = $typeInstanceOptions;
-        parent::__construct($context, $data, $jsonHelper, $directoryHelper);
+        parent::__construct($context, $data);
     }
 
     /**
