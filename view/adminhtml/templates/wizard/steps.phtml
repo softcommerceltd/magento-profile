@@ -4,7 +4,6 @@
  * See LICENSE.txt for license details.
  */
 
-/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
 /** @var \SoftCommerce\Profile\Block\Adminhtml\Wizard\Steps $block */
 ?>
 
@@ -18,18 +17,13 @@
     <div data-role="<?= /* @noEscape */ $eventHandlerComponent ?>"></div>
 <?php endforeach; ?>
 
-<?php
-$dataScope = /* @noEscape */ $block->getData('config/dataScope');
-$nameStep = /* @noEscape */ $block->getData('config/nameStepWizard');
-$scriptString = <<<script
+<script>
     require(['jquery', 'uiRegistry', 'underscore'], function ($, registry, _) {
         $('body').trigger('contentUpdated');
-        $('.{$dataScope}[data-role=steps-wizard-main]').applyBindings();
+        $('.<?= /* @noEscape */ $block->getData('config/dataScope') ?>[data-role=steps-wizard-main]').applyBindings();
 
-        registry.async('{$nameStep}')(function (component) {
+        registry.async('<?= /* @noEscape */ $block->getData('config/nameStepWizard') ?>')(function (component) {
             _.delay(component.open.bind(component), 500);
         })
     });
-script;
-?>
-<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+</script>
