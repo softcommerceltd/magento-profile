@@ -2,9 +2,9 @@
     "name": "softcommerce/module-profile",
     "description": "SoftCommerce -- Magento: Profile Module.",
     "require": {
-        "php": "~7.3.0||~7.4.0||~8.0.0||~8.1.0",
+        "php": "~7.2.0||~7.3.0||~7.4.0",
         "magento/module-backend": "*",
-        "magento/module-store": "^101.1",
+        "magento/module-store": "^101",
         "magento/module-ui": "^101",
         "magento/magento-composer-installer": "*",
         "softcommerce/module-core": "*"
@@ -19,5 +19,5 @@
             "SoftCommerce\\Profile\\": ""
         }
     },
-    "version": "1.1.0"
+    "version": "1.0.1"
 }
