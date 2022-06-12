@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.1
+- **Compatibility**: Compatibility with PHP 8.x
+
 ### Version 1.2.0
 - **Compatibility**: Compatibility with Magento Open Source 2.4.4 [#4]
 
