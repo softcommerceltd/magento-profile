@@ -1,6 +1,6 @@
 ## Changelog
 
-### Version 1.1.1
+### Version 1.2.2
 - **Enhancement**: Added ability to change profile schedule within profile list page.
 
 ### Version 1.1.0
