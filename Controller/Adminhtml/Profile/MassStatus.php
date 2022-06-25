@@ -15,7 +15,10 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Data\Collection;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\Component\MassAction\Filter;
+use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Model\ResourceModel;
+use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
+use SoftCommerce\ProfileSchedule\Model\ResourceModel\Schedule;
 
 /**
  * @inheritDoc
@@ -23,20 +26,20 @@ use SoftCommerce\Profile\Model\ResourceModel;
 class MassStatus extends AbstractMassAction implements HttpPostActionInterface
 {
     /**
-     * @var ResourceModel\Profile
+     * @var Schedule
      */
     private $resource;
 
     /**
      * @param Context $context
      * @param Filter $filter
-     * @param ResourceModel\Profile $resource
+     * @param Schedule $resource
      * @param ResourceModel\Profile\CollectionFactory $collectionFactory
      */
     public function __construct(
         Context $context,
         Filter $filter,
-        ResourceModel\Profile $resource,
+        Schedule $resource,
         ResourceModel\Profile\CollectionFactory $collectionFactory
     ) {
         $this->resource = $resource;
@@ -50,13 +53,20 @@ class MassStatus extends AbstractMassAction implements HttpPostActionInterface
      */
     protected function massAction(Collection $collection)
     {
-        $ids = $collection->getAllIds();
         $status = (int) $this->getRequest()->getParam('status');
-        $this->resource->updateStatus($status, $ids);
+        $result = [];
+        foreach ($collection->getColumnValues(ProfileInterface::TYPE_ID) as $typeId) {
+            $result[] = $this->resource->update(
+                [ScheduleInterface::STATUS => $status],
+                [ScheduleInterface::TYPE_ID . ' = ?' => $typeId]
+            );
+        }
 
-        $this->messageManager->addSuccessMessage(
-            __('Selected profiles have been updated with new status.')
-        );
+        if ($result) {
+            $this->messageManager->addSuccessMessage(
+                __('Selected profiles have been updated with new status.')
+            );
+        }
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
