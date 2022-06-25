@@ -58,7 +58,7 @@
             <action name="status">
                 <settings>
                     <type>status</type>
-                    <label translate="true">Change status</label>
+                    <label translate="true">Change Schedule Status</label>
                     <actions>
                         <action name="0">
                             <type>enable</type>
@@ -71,7 +71,7 @@
                             <type>disable</type>
                             <label translate="true">Inactive</label>
                             <url path="softcommerce/profile/massStatus">
-                                <param name="status">2</param>
+                                <param name="status">0</param>
                             </url>
                         </action>
                     </actions>

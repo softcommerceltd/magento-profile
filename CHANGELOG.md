@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.2
+- **Enhancement**: Added ability to change profile schedule within profile list page.
+
 ### Version 1.2.1
 - **Compatibility**: Compatibility with PHP 8.x
 
