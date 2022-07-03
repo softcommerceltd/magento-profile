@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.1.2
+- **Enhancement**: Changes to PDT.
+
 ### Version 1.1.1
 - **Enhancement**: Added ability to change profile schedule within profile list page.
 

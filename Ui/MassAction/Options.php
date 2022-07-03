@@ -78,7 +78,7 @@ class Options implements \JsonSerializable
     /**
      * @inheritDoc
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize()
     {
         if (null !== $this->options) {
             return $this->options;
