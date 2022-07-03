@@ -8,13 +8,13 @@ declare(strict_types=1);
 
 namespace SoftCommerce\Profile\Model\System\Message;
 
-use Magento\Framework\Notification\MessageInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Notification\MessageInterface;
 use Magento\Framework\Phrase;
+use Magento\Framework\UrlInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\UrlInterface;
 use SoftCommerce\Profile\Profile\EntityFactoryInterface;
 use SoftCommerce\ProfileConfig\Api\Data\ConfigInterface;
 use SoftCommerce\ProfileConfig\Model\ResourceModel\Config;
@@ -54,7 +54,6 @@ class InitialSetupProfile implements MessageInterface
     protected $urlBuilder;
 
     /**
-     * InitialProfileSetup constructor.
      * @param Config $config
      * @param ScopeConfigInterface $scopeConfig
      * @param UrlInterface $urlBuilder
