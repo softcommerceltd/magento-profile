@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <!--
- ~ Copyright © Soft Commerce Ltd. All rights reserved.
- ~ See LICENSE.txt for license details.
+/**
+ * Copyright © Soft Commerce Ltd. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
@@ -22,10 +24,5 @@
         <referenceContainer name="js">
             <block class="Magento\Backend\Block\Template" name="js.system_config_js" template="Magento_Config::system/config/js.phtml"/>
         </referenceContainer>
-        <!-- referenceContainer name="content">
-            <container name="adminhtml.plenty.profile.edit.wrapper" htmlTag="div" htmlClass="admin__scope-old">
-                <block class="SoftCommerce\PlentyClient\Block\Adminhtml\Profile\Edit" name="plenty.profile.config.edit"/>
-            </container>
-        </referenceContainer -->
     </body>
 </page>

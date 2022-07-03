@@ -108,6 +108,14 @@ class TypeInstanceOptions implements TypeInstanceOptionsInterface, OptionSourceI
     /**
      * @inheritDoc
      */
+    public function getLabel(string $typeId): ?string
+    {
+        return $this->getTypes($typeId)['label'] ?? null;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function toOptionArray()
     {
         return $this->getOptions();

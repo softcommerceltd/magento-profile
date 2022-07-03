@@ -54,4 +54,10 @@ interface TypeInstanceOptionsInterface
      * @return string|null
      */
     public function getCronGroupByTypeId(string $typeId): ?string;
+
+    /**
+     * @param string $typeId
+     * @return string|null
+     */
+    public function getLabel(string $typeId): ?string;
 }
