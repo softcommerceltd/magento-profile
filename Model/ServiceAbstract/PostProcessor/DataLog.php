@@ -25,6 +25,7 @@ class DataLog extends Service implements ProcessorInterface
 {
     private const REQUEST = '__REQUEST__';
     private const RESPONSE = '__RESPONSE__';
+
     /**
      * @var LogProcessorInterface
      */

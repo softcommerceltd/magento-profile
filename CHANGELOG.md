@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.0.6
+- **Compatibility**: Compatibility with Magento Extension Quality Program (EQP).
+
 ### Version 1.0.5
 - **Fix**: Added fix to composer.json dependencies.
 
