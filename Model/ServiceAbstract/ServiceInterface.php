@@ -31,9 +31,9 @@ interface ServiceInterface
      */
     public function getDataStorage(): DataStorageInterface;
 
-     /**
-      * @return MessageStorageInterface
-      */
+    /**
+     * @return MessageStorageInterface
+     */
     public function getMessageStorage(): MessageStorageInterface;
 
     /**
