@@ -26,7 +26,7 @@ abstract class AbstractMassAction extends Action
     /**
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_Profile::profile';
+    public const ADMIN_RESOURCE = 'SoftCommerce_Profile::manage';
 
     /**
      * @var string

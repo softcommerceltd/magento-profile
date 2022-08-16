@@ -10,14 +10,14 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="SoftCommerce_Core::softcommerce_core">
-                    <resource id="SoftCommerce_Profile::profile_core" title="SoftCommerce Profile" translate="title" sortOrder="20">
-                        <resource id="SoftCommerce_Profile::profile" title="Manage Profile" translate="title" sortOrder="10"/>
+                    <resource id="SoftCommerce_Profile::profile" title="SoftCommerce Profile" translate="title" sortOrder="20">
+                        <resource id="SoftCommerce_Profile::manage" title="Profile Actions" translate="title" sortOrder="10"/>
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="SoftCommerce_Profile::system_config" title="SoftCommerce Core" translate="title" sortOrder="101"/>
+                            <resource id="SoftCommerce_Profile::system_config" title="SoftCommerce Profile Section" translate="title" sortOrder="999"/>
                         </resource>
                     </resource>
                 </resource>

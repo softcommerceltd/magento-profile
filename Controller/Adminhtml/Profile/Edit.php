@@ -8,12 +8,8 @@ declare(strict_types=1);
 
 namespace SoftCommerce\Profile\Controller\Adminhtml\Profile;
 
-use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\Controller\ResultInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Controller\Adminhtml\Profile as ProfileController;
 
@@ -23,7 +19,7 @@ use SoftCommerce\Profile\Controller\Adminhtml\Profile as ProfileController;
 class Edit extends ProfileController implements HttpGetActionInterface
 {
     /**
-     * @return Page|ResponseInterface|Redirect|ResultInterface
+     * @inheritDoc
      */
     public function execute()
     {
