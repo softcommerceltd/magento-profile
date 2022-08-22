@@ -148,8 +148,14 @@ class Save extends ProfileController
         }
 
         try {
+            $this->_eventManager->dispatch(
+                'softcommerce_profile_config_save_before',
+                ['request' => $this->getRequest()]
+            );
+
             $configData = $this->configDataScopeStorage->saveFormData($this->getRequest()->getParams());
             $this->messageManager->addSuccessMessage(__('Profile configuration has been saved.'));
+
             $this->_eventManager->dispatch(
                 'softcommerce_profile_config_save_after',
                 ['configData' => $configData, 'request' => $this->getRequest()]
