@@ -27,7 +27,7 @@ abstract class Profile extends Action
     /**
      * @inheritDoc
      */
-    public const ADMIN_RESOURCE = 'SoftCommerce_Profile::profile';
+    public const ADMIN_RESOURCE = 'SoftCommerce_Profile::manage';
 
     /**
      * Profile base Url

@@ -9,11 +9,8 @@ declare(strict_types=1);
 namespace SoftCommerce\Profile\Controller\Adminhtml\Profile;
 
 use Magento\Backend\App\Action;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\View\Result\PageFactory;
-use Magento\Backend\Model\View\Result\Forward;
-use Magento\Framework\Controller\ResultInterface;
 
 /**
  * @inheritDoc
@@ -23,7 +20,7 @@ class Index extends Action
     /**
      * @inheritDoc
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_Profile::profile';
+    public const ADMIN_RESOURCE = 'SoftCommerce_Profile::manage';
 
     /**
      * @var PageFactory
@@ -51,7 +48,7 @@ class Index extends Action
     }
 
     /**
-     * @return Forward|ResponseInterface|ResultInterface|PageFactory
+     * @inheritDoc
      */
     public function execute()
     {

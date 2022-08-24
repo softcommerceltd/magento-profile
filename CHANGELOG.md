@@ -1,5 +1,11 @@
 ## Changelog
 
+### Version 1.2.6
+- **Enhancement**: Added new event `softcommerce_profile_config_save_before` to profile save action.
+
+### Version 1.2.5
+- **Enhancement**: Improvements to ACL rules.
+
 ### Version 1.2.4
 - **Compatibility**: Compatibility with Magento Extension Quality Program (EQP).
 
