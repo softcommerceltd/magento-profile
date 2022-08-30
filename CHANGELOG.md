@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.7
+- **Fix**: Removed test cron jobs.
+
 ### Version 1.2.6
 - **Enhancement**: Added new event `softcommerce_profile_config_save_before` to profile save action.
 
