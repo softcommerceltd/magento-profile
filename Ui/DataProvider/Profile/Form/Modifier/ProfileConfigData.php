@@ -84,7 +84,7 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
         foreach ($this->serializedData ?: [] as $path => $state) {
             $path = explode('/', $path);
             array_shift($path);
-            if (count($path) <> 2) {
+            if (count($path) != 2) {
                 continue;
             }
 
@@ -225,7 +225,8 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     {
         if (isset($data['componentType']['value']) && $data['componentType']['value'] === 'dynamicRows') {
             $this->serializedData[$configPath] = $this->configScope->isCurrentScopeDefault()
-                || ($this->getScopeValueFromRequest($this->parseScopeCode($data))
+                || (
+                    $this->getScopeValueFromRequest($this->parseScopeCode($data))
                     && !$this->configScope->isDefaultValue($configPath)
                 );
         }
