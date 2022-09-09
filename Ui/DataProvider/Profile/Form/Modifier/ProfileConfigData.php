@@ -231,7 +231,7 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
                 );
         }
 
-        if (isset($data['isDataSerialized']['value']) && false !== $data['isDataSerialized']['value']) {
+        if (isset($data['isDataSerialized']['value']) && 'false' !== $data['isDataSerialized']['value']) {
             $this->serializedData[$configPath] = true;
         }
     }

@@ -1,7 +1,7 @@
 ## Changelog
 
 ### Version 1.2.7
-- **Fix**: Removed test cron jobs.
+- **Fix**: Applied a fix to `isDataSerialized` UI select argument, where element type select failed to retrieve values for serialised data type.
 
 ### Version 1.2.6
 - **Enhancement**: Added new event `softcommerce_profile_config_save_before` to profile save action.
