@@ -17,14 +17,14 @@ use SoftCommerce\Profile\Model\ResourceModel;
 class GetProfileData implements GetProfileDataInterface
 {
     /**
-     * @var array
+     * @var array|null
      */
-    private $data;
+    private ?array $data = null;
 
     /**
      * @var ResourceModel\Profile
      */
-    private $resource;
+    private ResourceModel\Profile $resource;
 
     /**
      * @param ResourceModel\Profile $resource

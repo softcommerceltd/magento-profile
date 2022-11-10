@@ -20,7 +20,7 @@ use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
  */
 class AbstractModifier
 {
-    const FORM_NAME = 'softcommerce_profile_form';
+    public const FORM_NAME = 'softcommerce_profile_form';
 
     /**
      * @var ArrayManager

@@ -20,7 +20,7 @@ class Processor extends Service implements ServiceInterface
     /**
      * @var ProcessorInterface[]
      */
-    private $processors;
+    private array $processors;
 
     /**
      * @param DataStorageInterfaceFactory $dataStorageFactory
@@ -47,7 +47,7 @@ class Processor extends Service implements ServiceInterface
     {
         $this->initialize();
 
-        foreach ($this->processors as $entity => $processor) {
+        foreach ($this->processors as $processor) {
             $processor->execute();
         }
 

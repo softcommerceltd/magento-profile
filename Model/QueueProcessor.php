@@ -17,7 +17,7 @@ use SoftCommerce\ProfileHistory\Api\HistoryManagementInterface;
 
 /**
  * @inheritDoc
- * @inheritDoc
+ * @deprecated
  */
 class QueueProcessor extends QueueProcessor\AbstractProcessor implements QueueProcessorInterface
 {
@@ -29,17 +29,17 @@ class QueueProcessor extends QueueProcessor\AbstractProcessor implements QueuePr
     /**
      * @var HistoryManagementInterface
      */
-    private $profileHistoryManagement;
+    private HistoryManagementInterface $profileHistoryManagement;
 
     /**
      * @var StatusPredictionInterface
      */
-    private $statusPrediction;
+    private StatusPredictionInterface $statusPrediction;
 
     /**
      * @var QueueProcessor\ProcessorInterface[]
      */
-    private $queues;
+    private array $queues;
 
     /**
      * @param MessageStorageInterfaceFactory $messageStorageFactory
@@ -57,7 +57,7 @@ class QueueProcessor extends QueueProcessor\AbstractProcessor implements QueuePr
     ) {
         $this->profileHistoryManagement = $profileHistoryManagement;
         $this->statusPrediction = $statusPrediction;
-        $this->profileEntity = $data[ProfileEntityInterface::PROFILE_ENTITY] ?? null;
+        $this->profileEntity = $data['profile_entity'] ?? null;
         $this->initQueues($queues);
         parent::__construct($messageStorageFactory);
     }

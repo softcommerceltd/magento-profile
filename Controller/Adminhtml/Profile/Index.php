@@ -25,12 +25,12 @@ class Index extends Action
     /**
      * @var PageFactory
      */
-    private $resultPageFactory;
+    private PageFactory $resultPageFactory;
 
     /**
      * @var ForwardFactory
      */
-    private $resultForwardFactory;
+    private ForwardFactory $resultForwardFactory;
 
     /**
      * @param Action\Context $context

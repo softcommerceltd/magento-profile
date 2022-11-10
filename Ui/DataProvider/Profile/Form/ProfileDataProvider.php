@@ -22,12 +22,12 @@ class ProfileDataProvider extends AbstractDataProvider
     /**
      * @var PoolInterface
      */
-    private $pool;
+    private PoolInterface $pool;
 
     /**
      * @var UrlInterface
      */
-    private $urlBuilder;
+    private UrlInterface $urlBuilder;
 
     /**
      * @param CollectionFactory $collectionFactory
@@ -90,7 +90,7 @@ class ProfileDataProvider extends AbstractDataProvider
     /**
      * @inheritDoc
      */
-    public function getMeta()
+    public function getMeta(): array
     {
         $meta = parent::getMeta();
         foreach ($this->pool->getModifiersInstances() as $modifier) {

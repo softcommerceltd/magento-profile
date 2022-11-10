@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.8
+- **Compatibility**: Compatibility with Magento [OS/AC] 2.4.5 and PHP 8
+
 ### Version 1.2.7
 - **Fix**: Applied a fix to `isDataSerialized` UI select argument, where element type select failed to retrieve values for serialised data type.
 

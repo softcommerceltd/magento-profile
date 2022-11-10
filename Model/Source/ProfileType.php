@@ -17,14 +17,14 @@ use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
 class ProfileType implements OptionSourceInterface
 {
     /**
-     * @var array
+     * @var array|null
      */
-    private $options;
+    private ?array $options = null;
 
     /**
      * @var TypeInstanceOptionsInterface
      */
-    private $typeInstanceOptions;
+    private TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
@@ -35,9 +35,9 @@ class ProfileType implements OptionSourceInterface
     }
 
     /**
-     * @return array
+     * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): ?array
     {
         if (null === $this->options) {
             $this->options = [];

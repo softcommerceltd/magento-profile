@@ -18,7 +18,7 @@ class Config implements ConfigInterface
     /**
      * @var DataInterface
      */
-    private $config;
+    private DataInterface $config;
 
     /**
      * @param DataInterface $config

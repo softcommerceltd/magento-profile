@@ -20,12 +20,12 @@ class TypeInstanceOptions implements TypeInstanceOptionsInterface, OptionSourceI
     /**
      * @var ConfigInterface
      */
-    private $config;
+    private ConfigInterface $config;
 
     /**
-     * @var array
+     * @var array|null
      */
-    private $types;
+    private ?array $types = null;
 
     /**
      * @param ConfigInterface $config

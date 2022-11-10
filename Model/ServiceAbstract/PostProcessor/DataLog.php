@@ -29,17 +29,17 @@ class DataLog extends Service implements ProcessorInterface
     /**
      * @var LogProcessorInterface
      */
-    private $logger;
+    private LogProcessorInterface $logger;
 
     /**
-     * @var LogConfigInterface
+     * @var LogConfigInterface|null
      */
-    private $logConfig;
+    private ?LogConfigInterface $logConfig = null;
 
     /**
      * @var LogConfigInterfaceFactory
      */
-    private $logConfigFactory;
+    private LogConfigInterfaceFactory $logConfigFactory;
 
     /**
      * @param LogConfigInterfaceFactory $logConfigFactory

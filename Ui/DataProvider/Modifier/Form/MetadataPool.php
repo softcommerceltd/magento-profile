@@ -22,7 +22,7 @@ class MetadataPool implements MetadataPoolInterface
     /**
      * @var CacheInterface
      */
-    private $cache;
+    private CacheInterface $cache;
 
     /**
      * @var array
@@ -32,12 +32,12 @@ class MetadataPool implements MetadataPoolInterface
     /**
      * @var ReaderFactory
      */
-    private $readerFactory;
+    private ReaderFactory $readerFactory;
 
     /**
      * @var SerializerInterface
      */
-    private $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * @param CacheInterface $cache

@@ -25,14 +25,14 @@ class AbstractProcessor
     protected $context;
 
     /**
-     * @var DataStorageInterfaceFactory
+     * @var MessageStorageInterfaceFactory
      */
-    protected $messageStorageFactory;
+    protected MessageStorageInterfaceFactory $messageStorageFactory;
 
     /**
      * @var MessageStorageInterface
      */
-    protected $responseStorage;
+    protected MessageStorageInterface $responseStorage;
 
     /**
      * AbstractProcessor constructor.

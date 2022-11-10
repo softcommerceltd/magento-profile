@@ -18,7 +18,7 @@ class Converter implements ConverterInterface
     /**
      * @inheritDoc
      */
-    public function convert($source)
+    public function convert($source): array
     {
         $output = [];
         $xpath = new \DOMXPath($source);

@@ -20,19 +20,19 @@ use Magento\Store\Model\Store;
 class StoreOptions implements OptionSourceInterface
 {
     /**
-     * @var array
+     * @var array|null
      */
-    private $options;
+    private ?array $options = null;
 
     /**
      * @var StoreRepositoryInterface
      */
-    private $storeRepository;
+    private StoreRepositoryInterface $storeRepository;
 
     /**
      * @var WebsiteRepositoryInterface
      */
-    private $websiteRepository;
+    private WebsiteRepositoryInterface $websiteRepository;
 
     /**
      * @param StoreRepositoryInterface $storeRepository
@@ -49,16 +49,16 @@ class StoreOptions implements OptionSourceInterface
     /**
      * @return array
      */
-    public function getAllOptions()
+    public function getAllOptions(): array
     {
         return $this->storeRepository->getList();
     }
 
     /**
-     * @return array
+     * @inheritDoc
      * @throws NoSuchEntityException
      */
-    public function toOptionArray()
+    public function toOptionArray(): ?array
     {
         if (null === $this->options) {
             $this->options = [];

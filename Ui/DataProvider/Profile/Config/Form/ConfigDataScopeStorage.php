@@ -25,17 +25,17 @@ class ConfigDataScopeStorage implements ConfigDataScopeStorageInterface
     /**
      * @var ConfigScopeInterface
      */
-    private $configScope;
+    private ConfigScopeInterface $configScope;
 
     /**
      * @var ResourceModel\Config
      */
-    private $resource;
+    private ResourceModel\Config $resource;
 
     /**
      * @var SerializerInterface
      */
-    private $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * @param ConfigScopeInterface $configScope
@@ -57,8 +57,8 @@ class ConfigDataScopeStorage implements ConfigDataScopeStorageInterface
      */
     public function saveFormData(array $request): array
     {
-        $profileId = isset($request['id']) ? (int) $request['id'] : null;
-        if (null === $profileId || !$typeId = $request[ProfileInterface::TYPE_ID] ?? null) {
+        $profileId = (int) ($request['id'] ?? null);
+        if (!$profileId || !$typeId = $request[ProfileInterface::TYPE_ID] ?? null) {
             return [];
         }
 

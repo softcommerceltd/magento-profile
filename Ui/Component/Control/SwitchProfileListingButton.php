@@ -23,12 +23,12 @@ class SwitchProfileListingButton implements ButtonProviderInterface
     /**
      * @var RequestInterface
      */
-    protected $request;
+    protected RequestInterface $request;
 
     /**
      * @var UrlInterface
      */
-    protected $urlBuilder;
+    protected UrlInterface $urlBuilder;
 
     /**
      * @param RequestInterface $request

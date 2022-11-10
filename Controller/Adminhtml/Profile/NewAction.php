@@ -18,7 +18,7 @@ use SoftCommerce\Profile\Controller\Adminhtml\Profile as ProfileController;
 class NewAction extends ProfileController
 {
     /**
-     * @return ResponseInterface|ResultInterface|void
+     * @inheritDoc
      */
     public function execute()
     {

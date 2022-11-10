@@ -24,12 +24,12 @@ abstract class AbstractManagement
     /**
      * @var DataStorageInterfaceFactory
      */
-    protected $dataStorageFactory;
+    protected DataStorageInterfaceFactory $dataStorageFactory;
 
     /**
-     * @var DataStorageInterfaceFactory
+     * @var MessageStorageInterfaceFactory
      */
-    protected $messageStorageFactory;
+    protected MessageStorageInterfaceFactory $messageStorageFactory;
 
     /**
      * @var DataStorageInterface
@@ -39,22 +39,17 @@ abstract class AbstractManagement
     /**
      * @var DateTimeLocaleInterface
      */
-    protected $dateTimeLocale;
+    protected DateTimeLocaleInterface $dateTimeLocale;
 
     /**
      * @var array
      */
-    protected $clientResponse;
+    protected array $collectionResult = [];
 
     /**
      * @var array
      */
-    protected $collectionResult;
-
-    /**
-     * @var array
-     */
-    protected $response;
+    protected array $response = [];
 
     /**
      * @var MessageStorageInterface
@@ -64,12 +59,12 @@ abstract class AbstractManagement
     /**
      * @var SerializerInterface
      */
-    protected $serializer;
+    protected SerializerInterface $serializer;
 
     /**
      * @var array
      */
-    protected $searchCriteria;
+    protected array $searchCriteria;
 
     /**
      * @param DataStorageInterfaceFactory $dataStorageFactory

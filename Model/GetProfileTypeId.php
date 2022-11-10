@@ -19,12 +19,12 @@ class GetProfileTypeId implements GetProfileTypeIdInterface
     /**
      * @var array
      */
-    private $data;
+    private array $data;
 
     /**
      * @var ResourceModel\Profile
      */
-    private $resource;
+    private ResourceModel\Profile $resource;
 
     /**
      * @param ResourceModel\Profile $resource
@@ -54,7 +54,7 @@ class GetProfileTypeId implements GetProfileTypeIdInterface
         if (null !== $profileId) {
             $this->data[$profileId] = null;
         } else {
-            $this->data = null;
+            $this->data = [];
         }
     }
 

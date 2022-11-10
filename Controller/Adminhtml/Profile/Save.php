@@ -10,9 +10,6 @@ namespace SoftCommerce\Profile\Controller\Adminhtml\Profile;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\Result\Redirect;
-use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
@@ -36,12 +33,12 @@ class Save extends ProfileController
     /**
      * @var ConfigDataScopeStorageInterface
      */
-    private $configDataScopeStorage;
+    private ConfigDataScopeStorageInterface $configDataScopeStorage;
 
     /**
      * @var DataPersistorInterface
      */
-    private $dataPersistor;
+    private DataPersistorInterface $dataPersistor;
 
     /**
      * @param ConfigDataScopeStorageInterface $configDataScopeStorage
@@ -79,7 +76,7 @@ class Save extends ProfileController
     }
 
     /**
-     * @return ResponseInterface|Redirect|ResultInterface
+     * @inheritDoc
      */
     public function execute()
     {

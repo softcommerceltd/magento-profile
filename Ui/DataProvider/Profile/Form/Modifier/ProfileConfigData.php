@@ -24,31 +24,31 @@ use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
  */
 class ProfileConfigData extends AbstractModifier implements ModifierInterface
 {
-    const DATA_SOURCE = 'profile_config';
-    const FORM_PREFIX = 'profile_';
-    const FORM_SUFFIX = '_form';
-    const DATA_SOURCE_COMPONENT_TEMPLATE = 'SoftCommerce_Profile/js/form/element/single-checkbox-use-default';
-    const DATA_SOURCE_SCOPE_TEMPLATE = 'SoftCommerce_Profile/form/element/helper/service';
+    public const DATA_SOURCE = 'profile_config';
+    public const FORM_PREFIX = 'profile_';
+    public const FORM_SUFFIX = '_form';
+    public const DATA_SOURCE_COMPONENT_TEMPLATE = 'SoftCommerce_Profile/js/form/element/single-checkbox-use-default';
+    public const DATA_SOURCE_SCOPE_TEMPLATE = 'SoftCommerce_Profile/form/element/helper/service';
 
     /**
      * @var ConfigDataScopeInterface
      */
-    private $configScope;
+    private ConfigDataScopeInterface $configScope;
 
     /**
      * @var array
      */
-    private $meta;
+    private array $meta = [];
 
     /**
      * @var SerializerInterface
      */
-    private $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * @var array
      */
-    private $serializedData;
+    private array $serializedData = [];
 
     /**
      * @param ConfigDataScopeInterfaceFactory $configScopeFactory
@@ -72,11 +72,9 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     }
 
     /**
-     * @param array $data
-     * @return array
-     * @throws \Exception
+     * @inheritDoc
      */
-    public function modifyData(array $data)
+    public function modifyData(array $data): array
     {
         $model = $this->registryLocator->getProfile();
         $configData = $this->configScope->get();
@@ -122,11 +120,9 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     }
 
     /**
-     * @param array $meta
-     * @return array
-     * @throws \Exception
+     * @inheritDoc
      */
-    public function modifyMeta(array $meta)
+    public function modifyMeta(array $meta): array
     {
         return $this->generateMetaData($meta);
     }

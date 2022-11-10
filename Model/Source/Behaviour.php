@@ -15,21 +15,21 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class Behaviour implements OptionSourceInterface
 {
-    const APPEND = 'append';
-    const REPLACE = 'replace';
-    const DELETE = 'delete';
+    public const APPEND = 'append';
+    public const REPLACE = 'replace';
+    public const DELETE = 'delete';
 
     /**
      * Options array
      *
      * @var array
      */
-    private $options;
+    private array $options = [];
 
     /**
-     * @return array
+     * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         if (!$this->options) {
             $this->options = [

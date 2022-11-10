@@ -15,6 +15,7 @@ use SoftCommerce\Core\Framework\MessageStorageInterface;
 /**
  * Interface QueueProcessorInterface used to process profile queue
  * run by profile scheduler over cronjob.
+ * @deprecated
  */
 interface QueueProcessorInterface
 {

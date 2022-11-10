@@ -17,14 +17,14 @@ use SoftCommerce\Profile\Api\Data\ProfileInterface;
 class Profile extends AbstractResource
 {
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_useIsObjectNew = true;
 
     /**
      * @var string
      */
-    protected $_eventPrefix = 'softcommerce_profile_entity_resource_model';
+    protected string $_eventPrefix = 'softcommerce_profile_entity_resource_model';
 
     /**
      * @inheritDoc

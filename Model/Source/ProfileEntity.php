@@ -11,7 +11,6 @@ namespace SoftCommerce\Profile\Model\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Model\GetProfileDataInterface;
-use SoftCommerce\ProfileSchedule\Model\GetScheduleDataInterface;
 
 /**
  * @inheritDoc
@@ -19,14 +18,14 @@ use SoftCommerce\ProfileSchedule\Model\GetScheduleDataInterface;
 class ProfileEntity implements OptionSourceInterface
 {
     /**
-     * @var GetScheduleDataInterface
+     * @var GetProfileDataInterface
      */
-    private $getProfileData;
+    private GetProfileDataInterface $getProfileData;
 
     /**
-     * @var array
+     * @var array|null
      */
-    private $options;
+    private ?array $options = null;
 
     /**
      * @param GetProfileDataInterface $getProfileData
@@ -39,7 +38,7 @@ class ProfileEntity implements OptionSourceInterface
     /**
      * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): ?array
     {
         if (null === $this->options) {
             $this->options = [];
