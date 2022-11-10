@@ -15,13 +15,12 @@ use Magento\Ui\DataProvider\Modifier\ModifierInterface;
  */
 class ProfileEntityData extends AbstractModifier implements ModifierInterface
 {
-    const DATA_SOURCE = 'profile_entity';
+    public const DATA_SOURCE = 'profile_entity';
 
     /**
-     * @param array $data
-     * @return array
+     * @inheritDoc
      */
-    public function modifyData(array $data)
+    public function modifyData(array $data): array
     {
         $data += [
             $this->registryLocator->getProfile()->getEntityId() => [
@@ -33,10 +32,9 @@ class ProfileEntityData extends AbstractModifier implements ModifierInterface
     }
 
     /**
-     * @param array $meta
-     * @return array
+     * @inheritDoc
      */
-    public function modifyMeta(array $meta)
+    public function modifyMeta(array $meta): array
     {
         return $meta;
     }

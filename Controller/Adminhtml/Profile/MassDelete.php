@@ -11,6 +11,7 @@ namespace SoftCommerce\Profile\Controller\Adminhtml\Profile;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Ui\Component\MassAction\Filter;
 use Magento\Framework\Controller\ResultFactory;
@@ -27,7 +28,7 @@ class MassDelete extends AbstractMassAction
     /**
      * @var ResourceModel\Profile
      */
-    private $resource;
+    private ResourceModel\Profile $resource;
 
     /**
      * @param Context $context
@@ -49,7 +50,7 @@ class MassDelete extends AbstractMassAction
      * @param Collection $collection
      * @return Redirect
      * @throws CouldNotDeleteException
-     * @throws NoSuchEntityException
+     * @throws NoSuchEntityException|LocalizedException
      */
     protected function massAction(Collection $collection)
     {

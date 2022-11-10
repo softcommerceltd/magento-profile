@@ -27,32 +27,32 @@ class SwitchProfileFormButton implements ButtonProviderInterface
     /**
      * @var string|null
      */
-    protected $fontName;
+    protected ?string $fontName;
 
     /**
      * @var GetProfileDataByTypeIdInterface
      */
-    protected $getProfileDataByTypeId;
+    protected GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
 
     /**
      * @var string|null
      */
-    protected $label;
+    protected ?string $label;
 
     /**
      * @var RequestInterface
      */
-    protected $request;
+    protected RequestInterface $request;
 
     /**
      * @var TypeInstanceOptionsInterface
      */
-    protected $typeInstanceOptions;
+    protected TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @var UrlInterface
      */
-    protected $urlBuilder;
+    protected UrlInterface $urlBuilder;
 
     /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId

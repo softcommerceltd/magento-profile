@@ -26,22 +26,22 @@ class Actions extends Column
     /**
      * @var Escaper
      */
-    protected $escaper;
+    protected Escaper $escaper;
 
     /**
      * @var GetProfileDataByTypeIdInterface
      */
-    protected $getProfileDataByTypeId;
+    protected GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
 
     /**
      * @var array
      */
-    protected $profiles;
+    protected array $profiles = [];
 
     /**
      * @var UrlInterface
      */
-    protected $urlBuilder;
+    protected UrlInterface $urlBuilder;
 
     /**
      * @param Escaper $escaper

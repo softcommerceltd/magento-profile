@@ -8,16 +8,13 @@ declare(strict_types=1);
 
 namespace SoftCommerce\Profile\Model;
 
-use Magento\Framework\Api\SearchResults;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\Profile\Api\Data\Profile\SearchResultsInterfaceFactory;
 use SoftCommerce\Profile\Api\ProfileRepositoryInterface;
-use SoftCommerce\Profile\Api\Data\Profile\SearchResultsInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Model\ResourceModel;
 
@@ -29,27 +26,27 @@ class ProfileRepository implements ProfileRepositoryInterface
     /**
      * @var ResourceModel\Profile
      */
-    private $resource;
+    private ResourceModel\Profile $resource;
 
     /**
      * @var ProfileFactory
      */
-    private $profileFactory;
+    private ProfileFactory $profileFactory;
 
     /**
      * @var ResourceModel\Profile\CollectionFactory
      */
-    private $profileCollectionFactory;
+    private ResourceModel\Profile\CollectionFactory $profileCollectionFactory;
 
     /**
-     * @var SearchResultsInterface|SearchResultsInterfaceFactory
+     * @var SearchResultsInterfaceFactory
      */
-    private $searchResultsFactory;
+    private SearchResultsInterfaceFactory $searchResultsFactory;
 
     /**
      * @var CollectionProcessorInterface
      */
-    private $collectionProcessor;
+    private CollectionProcessorInterface $collectionProcessor;
 
     /**
      * @param ResourceModel\Profile $resource
@@ -73,8 +70,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param SearchCriteriaInterface $searchCriteria
-     * @return Data\Profile\SearchResultsInterface|SearchResults
+     * @inheritDoc
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
@@ -82,7 +78,6 @@ class ProfileRepository implements ProfileRepositoryInterface
         $collection = $this->profileCollectionFactory->create();
         $this->collectionProcessor->process($searchCriteria, $collection);
 
-        /** @var Data\Profile\SearchResultsInterface|SearchResults $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($searchCriteria);
         $searchResults->setItems($collection->getItems());
@@ -91,10 +86,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param int $entityId
-     * @param string|null $field
-     * @return ProfileInterface
-     * @throws NoSuchEntityException
+     * @inheritDoc
      */
     public function get($entityId, $field = null)
     {
@@ -109,9 +101,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param int $profileId
-     * @return ProfileInterface
-     * @throws NoSuchEntityException
+     * @inheritDoc
      */
     public function getById($profileId)
     {
@@ -119,11 +109,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param string $entityType
-     * @param string $adaptor
-     * @return ProfileInterface|Profile
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
+     * @inheritDoc
      */
     public function getByEntity($entityType, $adaptor)
     {
@@ -141,10 +127,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param string $entityType
-     * @param string $adaptor
-     * @return int|mixed|null
-     * @throws LocalizedException
+     * @inheritDoc
      */
     public function getIdByEntity($entityType, $adaptor)
     {
@@ -155,10 +138,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param ProfileInterface|Profile $profile
-     * @return ProfileInterface|Profile
-     * @throws CouldNotSaveException
-     * @throws LocalizedException
+     * @inheritDoc
      */
     public function save(ProfileInterface $profile)
     {
@@ -171,9 +151,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param ProfileInterface|Profile $profile
-     * @return bool
-     * @throws CouldNotDeleteException
+     * @inheritDoc
      */
     public function delete(ProfileInterface $profile)
     {
@@ -186,10 +164,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     }
 
     /**
-     * @param int $profileId
-     * @return bool
-     * @throws CouldNotDeleteException
-     * @throws NoSuchEntityException
+     * @inheritDoc
      */
     public function deleteById($profileId)
     {

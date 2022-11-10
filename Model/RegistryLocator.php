@@ -21,17 +21,17 @@ class RegistryLocator implements RegistryLocatorInterface
     /**
      * @var Registry
      */
-    private $registry;
+    private Registry $registry;
 
     /**
-     * @var ProfileInterface
+     * @var ProfileInterface|null
      */
-    private $profile;
+    private ?ProfileInterface $profile = null;
 
     /**
-     * @var StoreInterface
+     * @var StoreInterface|null
      */
-    private $store;
+    private ?StoreInterface $store = null;
 
     /**
      * @param Registry $registry

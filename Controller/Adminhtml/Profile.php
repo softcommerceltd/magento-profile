@@ -42,12 +42,12 @@ abstract class Profile extends Action
     /**
      * @var ConfigScopeInterface
      */
-    protected $configScope;
+    protected ConfigScopeInterface $configScope;
 
     /**
      * @var Registry
      */
-    protected $coreRegistry;
+    protected Registry $coreRegistry;
 
     /**
      * @var ProfileInterface|Profile
@@ -57,27 +57,27 @@ abstract class Profile extends Action
     /**
      * @var ProfileFactory
      */
-    protected $profileFactory;
+    protected ProfileFactory $profileFactory;
 
     /**
      * @var ProfileRepositoryInterface
      */
-    protected $profileRepository;
+    protected ProfileRepositoryInterface $profileRepository;
 
     /**
      * @var LayoutFactory
      */
-    protected $resultLayoutFactory;
+    protected LayoutFactory $resultLayoutFactory;
 
     /**
      * @var PageFactory
      */
-    protected $resultPageFactory;
+    protected PageFactory $resultPageFactory;
 
     /**
      * @var TypeInstanceOptionsInterface
      */
-    protected $typeInstanceOptions;
+    protected TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @param ConfigScopeInterface $configScope

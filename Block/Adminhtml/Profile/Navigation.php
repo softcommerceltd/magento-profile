@@ -9,8 +9,6 @@ declare(strict_types=1);
 namespace SoftCommerce\Profile\Block\Adminhtml\Profile;
 
 use Magento\Backend\Block\Template;
-use Magento\Directory\Helper\Data as DirectoryHelper;
-use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Magento\Framework\Phrase;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
@@ -23,10 +21,10 @@ class Navigation extends Template
     /**
      * @var TypeInstanceOptionsInterface
      */
-    protected $typeInstanceOptions;
+    protected TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
-     * @inhertiDoc
+     * @var string
      */
     protected $_template = 'SoftCommerce_Profile::profile/navigation.phtml';
 

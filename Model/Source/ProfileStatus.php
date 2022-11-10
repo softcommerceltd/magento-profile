@@ -15,13 +15,13 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class ProfileStatus implements OptionSourceInterface
 {
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 0;
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 0;
 
     /**
-     * @return array
+     * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         $options = [];
         $availableOptions = [self::STATUS_ENABLED => __('Active'), self::STATUS_DISABLED => __('Inactive')];

@@ -75,6 +75,4 @@
             </argument>
         </arguments>
     </type>
-    <!-- profile queue ::: interface | repository | management -->
-    <preference for="SoftCommerce\Profile\Model\QueueProcessorInterface" type="SoftCommerce\Profile\Model\QueueProcessor"/>
 </config>

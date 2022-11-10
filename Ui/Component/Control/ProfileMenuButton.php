@@ -20,27 +20,27 @@ class ProfileMenuButton implements ButtonProviderInterface
     /**
      * @var string|null
      */
-    protected $aclResource;
+    protected ?string $aclResource;
 
     /**
      * @var array
      */
-    private $actionData;
+    private array $actionData;
 
     /**
      * @var RequestInterface
      */
-    protected $request;
+    protected RequestInterface $request;
 
     /**
      * @var string|null
      */
-    protected $label;
+    protected ?string $label;
 
     /**
      * @var int|null
      */
-    protected $sortOrder;
+    protected ?int $sortOrder;
 
     /**
      * @param RequestInterface $request

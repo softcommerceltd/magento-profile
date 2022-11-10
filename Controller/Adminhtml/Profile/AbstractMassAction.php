@@ -12,8 +12,6 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Ui\Component\MassAction\Filter;
 use Magento\Framework\Data\Collection;
 use SoftCommerce\Profile\Model\ResourceModel\Profile\CollectionFactory;
@@ -31,17 +29,17 @@ abstract class AbstractMassAction extends Action
     /**
      * @var string
      */
-    protected $redirectUrl = '*/*/index';
+    protected string $redirectUrl = '*/*/index';
 
     /**
      * @var Filter
      */
-    protected $filter;
+    protected Filter $filter;
 
     /**
      * @var CollectionFactory
      */
-    protected $collectionFactory;
+    protected CollectionFactory $collectionFactory;
 
     /**
      * @param Context $context
@@ -59,7 +57,7 @@ abstract class AbstractMassAction extends Action
     }
 
     /**
-     * @return Redirect|ResponseInterface|ResultInterface
+     * @inheritDoc
      */
     public function execute()
     {

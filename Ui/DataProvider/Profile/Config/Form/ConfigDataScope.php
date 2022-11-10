@@ -21,37 +21,37 @@ class ConfigDataScope implements ConfigDataScopeInterface
     /**
      * @var ConfigScopeInterface
      */
-    private $configScope;
+    private ConfigScopeInterface $configScope;
 
     /**
      * @var string|null
      */
-    private $entity;
+    private ?string $entity = null;
 
     /**
-     * @var bool|null
+     * @var array
      */
-    private $isDefaultValueInMemory;
+    private array $isDefaultValueInMemory = [];
 
     /**
      * @var int|null
      */
-    private $profileId;
+    private ?int $profileId = null;
 
     /**
      * @var string|null
      */
-    private $scope;
+    private ?string $scope = null;
 
     /**
-     * @var int|string|null
+     * @var int|null
      */
-    private $scopeId;
+    private ?int $scopeId = null;
 
     /**
      * @var SerializerInterface
      */
-    private $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * @param ConfigScopeInterface $configScope
@@ -157,10 +157,9 @@ class ConfigDataScope implements ConfigDataScopeInterface
 
     /**
      * @param array $request
-     * @return ConfigDataScope
-     * @throws \Exception
+     * @return void
      */
-    private function init(array $request): ConfigDataScope
+    private function init(array $request): void
     {
         $this->entity = $request[ConfigScopeInterface::REQUEST_TYPE_ID] ?? null;
         $this->profileId = isset($request[ConfigScopeInterface::REQUEST_ID])
@@ -171,9 +170,10 @@ class ConfigDataScope implements ConfigDataScopeInterface
             : (isset($request[StoreScopeInterface::SCOPE_STORE])
                 ? StoreScopeInterface::SCOPE_STORE
                 : ScopeConfigInterface::SCOPE_TYPE_DEFAULT);
-        $this->scopeId = $request[StoreScopeInterface::SCOPE_WEBSITE]
-            ?? ($request[StoreScopeInterface::SCOPE_STORE] ?? null);
-
-        return $this;
+        $this->scopeId = isset($request[StoreScopeInterface::SCOPE_WEBSITE])
+            ? (int) $request[StoreScopeInterface::SCOPE_WEBSITE]
+            : (isset($request[StoreScopeInterface::SCOPE_STORE])
+                ? (int) $request[StoreScopeInterface::SCOPE_STORE]
+                : null);
     }
 }

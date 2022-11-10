@@ -32,17 +32,17 @@ abstract class Service
     /**
      * @var array
      */
-    protected $data;
+    protected array $data = [];
 
     /**
      * @var DataStorageInterfaceFactory
      */
-    protected $dataStorageFactory;
+    protected DataStorageInterfaceFactory $dataStorageFactory;
 
     /**
      * @var MessageStorageInterfaceFactory
      */
-    protected $messageStorageFactory;
+    protected MessageStorageInterfaceFactory $messageStorageFactory;
 
     /**
      * @var DataStorageInterface
@@ -72,17 +72,17 @@ abstract class Service
     /**
      * @var array
      */
-    protected $response;
+    protected array $response = [];
 
     /**
      * @var array
      */
-    protected $request;
+    protected array $request = [];
 
     /**
      * @var SearchCriteriaBuilder
      */
-    protected $searchCriteriaBuilder;
+    protected SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
      * @var string|null

@@ -23,42 +23,42 @@ class Options implements \JsonSerializable
     /**
      * @var array
      */
-    private $additionalData;
+    private array $additionalData = [];
 
     /**
      * @var array
      */
-    private $data;
+    private array $data;
 
     /**
      * @var GetProfileDataByTypeIdInterface
      */
-    private $getProfileDataByTypeId;
+    private GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
 
     /**
-     * @var array
+     * @var array|null
      */
-    private $options;
+    private ?array $options = null;
 
     /**
      * @var string|null
      */
-    private $paramName;
+    private ?string $paramName = null;
 
     /**
      * @var UrlInterface
      */
-    private $urlBuilder;
+    private UrlInterface $urlBuilder;
 
     /**
      * @var string|null
      */
-    private $urlPath;
+    private ?string $urlPath = null;
 
     /**
      * @var string|null
      */
-    private $profileTypeId;
+    private ?string $profileTypeId = null;
 
     /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId

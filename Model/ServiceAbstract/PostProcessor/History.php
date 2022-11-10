@@ -24,12 +24,12 @@ class History extends Service implements ProcessorInterface
     /**
      * @var HistoryManagementInterface
      */
-    private $historyManagement;
+    private HistoryManagementInterface $historyManagement;
 
     /**
      * @var StatusPredictionInterface
      */
-    private $statusPrediction;
+    private StatusPredictionInterface $statusPrediction;
 
     /**
      * @param HistoryManagementInterface $historyManagement

@@ -19,12 +19,12 @@ class GetProfileDataByTypeId implements GetProfileDataByTypeIdInterface
     /**
      * @var array
      */
-    private $data;
+    private array $data = [];
 
     /**
      * @var ResourceModel\Profile
      */
-    private $resource;
+    private ResourceModel\Profile $resource;
 
     /**
      * @param ResourceModel\Profile $resource
@@ -56,7 +56,7 @@ class GetProfileDataByTypeId implements GetProfileDataByTypeIdInterface
         if (null !== $typeId) {
             $this->data[$typeId] = null;
         } else {
-            $this->data = null;
+            $this->data = [];
         }
     }
 

@@ -20,37 +20,37 @@ use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
  */
 class AbstractModifier
 {
-    const FORM_NAME = 'softcommerce_profile_form';
+    public const FORM_NAME = 'softcommerce_profile_form';
 
     /**
      * @var ArrayManager
      */
-    protected $arrayManager;
+    protected ArrayManager $arrayManager;
 
     /**
      * @var RegistryLocatorInterface
      */
-    protected $registryLocator;
+    protected RegistryLocatorInterface $registryLocator;
 
     /**
      * @var RequestInterface
      */
-    protected $request;
+    protected RequestInterface $request;
 
     /**
      * @var MetadataPoolInterface
      */
-    protected $metadataPool;
+    protected MetadataPoolInterface $metadataPool;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $profileId;
+    protected ?int $profileId = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $typeId;
+    protected ?string $typeId = null;
 
     /**
      * @param ArrayManager $arrayManager
