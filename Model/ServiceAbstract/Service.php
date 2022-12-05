@@ -85,9 +85,9 @@ abstract class Service
     protected SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
-     * @var string|null
+     * @var string
      */
-    protected $typeId;
+    protected $typeId = '';
 
     /**
      * @param DataStorageInterfaceFactory $dataStorageFactory
@@ -240,9 +240,9 @@ abstract class Service
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getTypeId(): ?string
+    public function getTypeId(): string
     {
         return $this->typeId;
     }
