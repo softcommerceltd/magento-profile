@@ -21,6 +21,8 @@ use SoftCommerce\ProfileHistory\Api\HistoryManagementInterface;
  */
 class History extends Service implements ProcessorInterface
 {
+    private const BATCH_LIMIT = 50;
+
     /**
      * @var HistoryManagementInterface
      */
@@ -57,15 +59,13 @@ class History extends Service implements ProcessorInterface
      */
     public function execute(): void
     {
-        if (!$response = $this->getContext()->getMessageStorage()->getData()) {
-            return;
+        foreach (array_chunk($this->getContext()->getMessageStorage()->getData(), self::BATCH_LIMIT) as $batch) {
+            $this->historyManagement->create(
+                $this->getContext()->getProfileId(),
+                $this->getContext()->getTypeId(),
+                $this->statusPrediction->execute($batch),
+                $batch
+            );
         }
-
-        $this->historyManagement->create(
-            $this->getContext()->getProfileId(),
-            $this->getContext()->getTypeId(),
-            $this->statusPrediction->execute($response),
-            $response
-        );
     }
 }

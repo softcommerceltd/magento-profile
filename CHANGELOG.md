@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.0
+- **Enhancement**: [M2P-10] Added a performance improvement to profile history where messages are now saved in batches.
+
 ### Version 1.2.9
 - **Enhancement**: Moved mass status action for schedules from `SoftCommerce_Profile` to `SoftCommerce_ProfileSchedule`
 
