@@ -1,9 +1,7 @@
 ## Changelog
 
-### Version 1.3.1
-- **Enhancement**: Added an option to enable / disable history logging per profile.
-
 ### Version 1.3.0
+- **Enhancement**: Added an option to enable / disable history logging per profile.
 - **Enhancement**: [M2P-10] Added a performance improvement to profile history where messages are now saved in batches.
 
 ### Version 1.2.9
