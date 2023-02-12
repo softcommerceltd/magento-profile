@@ -15,6 +15,7 @@
     <preference for="SoftCommerce\Profile\Model\GetProfileDataInterface" type="SoftCommerce\Profile\Model\GetProfileData"/>
     <preference for="SoftCommerce\Profile\Model\GetProfileDataByTypeIdInterface" type="SoftCommerce\Profile\Model\GetProfileDataByTypeId"/>
     <preference for="SoftCommerce\Profile\Model\GetProfileTypeIdInterface" type="SoftCommerce\Profile\Model\GetProfileTypeId"/>
+    <preference for="SoftCommerce\Profile\Model\ServiceAbstract\CanProcessChainInterface" type="SoftCommerce\Profile\Model\ServiceAbstract\CanProcessChain"/>
     <!-- profile types -->
     <preference for="SoftCommerce\Profile\Model\ProfileTypes\ConfigInterface" type="SoftCommerce\Profile\Model\ProfileTypes\Config"/>
     <virtualType name="SoftCommerce\Profile\Model\ProfileTypes\Config\Data" type="Magento\Framework\Config\Data">
