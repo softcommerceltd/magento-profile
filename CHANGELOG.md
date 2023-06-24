@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.2
+- **Compatibility**: Add compatibility for PHP 8.2 and Magento 2.4.6-p1
+
 ### Version 1.3.1
 - **Enhancement**: Added process validation chain to allow simpler profile process interception.
 
