@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.3
+- **Enhancement**: Applied changes to the styles for message text colours. [#1]
+
 ### Version 1.3.2
 - **Compatibility**: Add compatibility for PHP 8.2 and Magento 2.4.6-p1
 
