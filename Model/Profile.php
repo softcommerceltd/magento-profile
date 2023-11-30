@@ -11,7 +11,6 @@ namespace SoftCommerce\Profile\Model;
 use Magento\Framework\DataObject\IdentityInterface;
 use SoftCommerce\Core\Model\AbstractModel;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
-use SoftCommerce\Profile\Model\ResourceModel;
 
 /**
  * @inheritDoc

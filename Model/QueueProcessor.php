@@ -12,7 +12,7 @@ use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\Core\Framework\MessageStorage\StatusPredictionInterface;
 use SoftCommerce\Core\Framework\MessageStorageInterface;
 use SoftCommerce\Core\Framework\MessageStorageInterfaceFactory;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Core\Model\Source\StatusInterface;
 use SoftCommerce\ProfileHistory\Api\HistoryManagementInterface;
 
 /**
@@ -104,7 +104,7 @@ class QueueProcessor extends QueueProcessor\AbstractProcessor implements QueuePr
                 $this->getResponseStorage()->addData(
                     __('Queue "%1" has been processed with errors: %2', $entity, $e->getMessage()),
                     $entity,
-                    Status::ERROR
+                    StatusInterface::ERROR
                 );
             }
         }
@@ -133,7 +133,7 @@ class QueueProcessor extends QueueProcessor\AbstractProcessor implements QueuePr
         $this->profileHistoryManagement->create(
             $this->getProfileEntity()->getProfile()->getEntityId(),
             $this->getProfileEntity()->getTypeId() . '_' . self::ENTITY_CODE,
-            $this->statusPrediction->execute($response, Status::COMPLETE),
+            $this->statusPrediction->execute($response, StatusInterface::COMPLETE),
             $response
         );
 
