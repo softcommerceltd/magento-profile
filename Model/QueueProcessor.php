@@ -124,7 +124,7 @@ class QueueProcessor extends QueueProcessor\AbstractProcessor implements QueuePr
     /**
      * @inheritDoc
      */
-    public function finalize()
+    public function finalize(): static
     {
         if (!$response = $this->getResponseStorage()->getData()) {
             return $this;

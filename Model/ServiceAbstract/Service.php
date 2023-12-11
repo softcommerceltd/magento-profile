@@ -87,7 +87,7 @@ abstract class Service
     /**
      * @var string
      */
-    protected $typeId = '';
+    protected string $typeId = '';
 
     /**
      * @param DataStorageInterfaceFactory $dataStorageFactory
@@ -115,7 +115,7 @@ abstract class Service
     /**
      * @return $this
      */
-    public function initialize()
+    public function initialize(): static
     {
         $this->request =
         $this->response =
@@ -130,7 +130,7 @@ abstract class Service
     /**
      * @return $this
      */
-    public function finalize()
+    public function finalize(): static
     {
         return $this;
     }
@@ -152,7 +152,7 @@ abstract class Service
      * @param $context
      * @return $this
      */
-    public function setContext($context)
+    public function setContext($context): static
     {
         $this->context = $context;
         return $this;
@@ -206,17 +206,17 @@ abstract class Service
      * @param int $profileId
      * @return $this
      */
-    public function setProfileId(int $profileId)
+    public function setProfileId(int $profileId): static
     {
         $this->profileId = $profileId;
         return $this;
     }
 
     /**
-     * @param $key
-     * @return array|mixed|null[]
+     * @param int|string|null $key
+     * @return mixed
      */
-    protected function getData($key = null)
+    protected function getData(int|string|null $key = null): mixed
     {
         return null !== $key
             ? ($this->data[$key] ?? null)
@@ -224,11 +224,11 @@ abstract class Service
     }
 
     /**
-     * @param array|string|mixed $data
+     * @param mixed $data
      * @param int|string|null $key
      * @return $this
      */
-    public function setData($data, $key = null)
+    public function setData(mixed $data, int|string|null $key = null): static
     {
         if (null !== $key) {
             $this->data[$key] = $data;
@@ -251,7 +251,7 @@ abstract class Service
      * @param ServiceInterface $context
      * @return $this
      */
-    public function init($context)
+    public function init($context): static
     {
         $this->context = $context;
         $this->setData($context->getData());
@@ -262,7 +262,7 @@ abstract class Service
      * @param ServiceInterface $context
      * @param ServiceInterface[] $instances
      */
-    protected function initTypeInstances($context, array $instances)
+    protected function initTypeInstances($context, array $instances): void
     {
         $this->context = $context;
         foreach ($instances as $instance) {

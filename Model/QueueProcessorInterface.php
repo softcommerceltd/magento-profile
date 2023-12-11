@@ -37,7 +37,7 @@ interface QueueProcessorInterface
      * @throws LocalizedException
      * @throws CouldNotSaveException
      */
-    public function finalize();
+    public function finalize(): static;
 
     /**
      * @return ProfileEntityInterface

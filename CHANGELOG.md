@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.5
+- **Enhancement**: General code improvements.
+
 ### Version 1.3.4
 - **Compatibility**: Add compatibility for Magento 2.4.6-p3 and Magento 2.4.7
 

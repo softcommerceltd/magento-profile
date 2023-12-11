@@ -57,7 +57,7 @@ class Processor extends Service implements ServiceInterface
     /**
      * @return Processor
      */
-    public function initialize()
+    public function initialize(): static
     {
         $this->initTypeInstances($this->context, $this->processors);
         return parent::initialize();
