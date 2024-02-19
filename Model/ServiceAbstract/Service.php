@@ -216,7 +216,7 @@ abstract class Service
      * @param int|string|null $key
      * @return mixed
      */
-    protected function getData(int|string|null $key = null): mixed
+    protected function getData($key = null): mixed
     {
         return null !== $key
             ? ($this->data[$key] ?? null)
@@ -228,12 +228,12 @@ abstract class Service
      * @param int|string|null $key
      * @return $this
      */
-    public function setData(mixed $data, int|string|null $key = null): static
+    public function setData(mixed $data, $key = null): static
     {
         if (null !== $key) {
             $this->data[$key] = $data;
         } else {
-            $this->data = $data;
+            $this->data = is_array($data) ? $data : [$data];
         }
 
         return $this;

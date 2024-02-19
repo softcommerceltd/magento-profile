@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.6
+- **Compatibility**: Apply a fix to compilation errors for modules that use type declaration with union types. [#11] https://github.com/softcommerceltd/mage2plenty-os/issues/11
+
 ### Version 1.3.5
 - **Enhancement**: General code improvements.
 
