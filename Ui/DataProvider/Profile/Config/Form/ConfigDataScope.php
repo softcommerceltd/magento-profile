@@ -162,14 +162,17 @@ class ConfigDataScope implements ConfigDataScopeInterface
     private function init(array $request): void
     {
         $this->entity = $request[ConfigScopeInterface::REQUEST_TYPE_ID] ?? null;
+
         $this->profileId = isset($request[ConfigScopeInterface::REQUEST_ID])
             ? (int) $request[ConfigScopeInterface::REQUEST_ID]
             : null;
+
         $this->scope = isset($request[StoreScopeInterface::SCOPE_WEBSITE])
             ? StoreScopeInterface::SCOPE_WEBSITE
             : (isset($request[StoreScopeInterface::SCOPE_STORE])
                 ? StoreScopeInterface::SCOPE_STORE
                 : ScopeConfigInterface::SCOPE_TYPE_DEFAULT);
+
         $this->scopeId = isset($request[StoreScopeInterface::SCOPE_WEBSITE])
             ? (int) $request[StoreScopeInterface::SCOPE_WEBSITE]
             : (isset($request[StoreScopeInterface::SCOPE_STORE])

@@ -65,6 +65,7 @@ class ConfigDataScopeStorage implements ConfigDataScopeStorageInterface
         $scope = $this->getScope($request);
         $scopeId = $this->getScopeId($request);
         $requestData = $this->prepareRequestData($request, $scope);
+
         $saveRequest = [];
         foreach ($requestData as $group => $attributes) {
             if (!is_array($attributes)) {
@@ -117,15 +118,19 @@ class ConfigDataScopeStorage implements ConfigDataScopeStorageInterface
         }
 
         $response = [];
-        foreach ($request['use_default'][ProfileConfigData::DATA_SOURCE] ?? [] as $group => $attributes) {
-            if (!is_array($attributes)) {
+        foreach ($request['use_default'][ProfileConfigData::DATA_SOURCE] ?? [] as $fieldsetPath => $fieldPaths) {
+            if (!is_array($fieldPaths)) {
                 continue;
             }
-            foreach ($attributes as $attribute => $attributeValue) {
-                if (!isset($requestData[$group][$attribute]) || $attributeValue) {
-                    continue;
+
+            foreach ($fieldPaths as $fieldPath => $canUseDefaultValue) {
+                if (is_string($canUseDefaultValue)) {
+                    $canUseDefaultValue = !($canUseDefaultValue === 'false' || $canUseDefaultValue === '0');
                 }
-                $response[$group][$attribute] = $requestData[$group][$attribute];
+
+                if (isset($requestData[$fieldsetPath][$fieldPath]) && !$canUseDefaultValue) {
+                    $response[$fieldsetPath][$fieldPath] = $requestData[$fieldsetPath][$fieldPath];
+                }
             }
         }
 
@@ -151,7 +156,7 @@ class ConfigDataScopeStorage implements ConfigDataScopeStorageInterface
      * @param array $request
      * @return int|string
      */
-    private function getScopeId(array $request)
+    private function getScopeId(array $request): int|string
     {
         return $request[StoreScopeInterface::SCOPE_WEBSITE]
             ?? ($request[StoreScopeInterface::SCOPE_STORE] ?? 0);

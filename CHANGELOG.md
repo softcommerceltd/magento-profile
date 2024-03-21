@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 1.4.0
+- **Feature**: Introduced functionality to support UI form scoped data [#3]
+- **Compatibility**: Introduced support for PHP 8.3 [#2]
+
 ### Version 1.3.6
 - **Compatibility**: Apply a fix to compilation errors for modules that use type declaration with union types. [#11] https://github.com/softcommerceltd/mage2plenty-os/issues/11
 

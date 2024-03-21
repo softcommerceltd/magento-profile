@@ -11,7 +11,6 @@ namespace SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Stdlib\ArrayManager;
-use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use Magento\Ui\DataProvider\Modifier\ModifierInterface;
 use SoftCommerce\Profile\Model\RegistryLocatorInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPoolInterface;
@@ -36,9 +35,19 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     private ConfigDataScopeInterface $configScope;
 
     /**
+     * @var string
+     */
+    private string $dataSource = 'profile_config';
+
+    /**
      * @var array
      */
-    private array $meta = [];
+    private array $meta;
+
+    /**
+     * @var string|null
+     */
+    private ?string $profileTypeId = null;
 
     /**
      * @var SerializerInterface
@@ -48,7 +57,7 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     /**
      * @var array
      */
-    private array $serializedData = [];
+    private array $modifyDataRequest = [];
 
     /**
      * @param ConfigDataScopeInterfaceFactory $configScopeFactory
@@ -79,25 +88,27 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
         $model = $this->registryLocator->getProfile();
         $configData = $this->configScope->get();
         $useDefault = [];
-        foreach ($this->serializedData ?: [] as $path => $state) {
+
+        foreach ($this->modifyDataRequest ?: [] as $path => $item) {
             $path = explode('/', $path);
             array_shift($path);
+
             if (count($path) != 2) {
                 continue;
             }
 
             $containerIndex = current($path);
             $fieldIndex = end($path);
+
             if (!isset($configData[$containerIndex][$fieldIndex])) {
                 continue;
             }
 
-            if (!$this->configScope->isCurrentScopeDefault()) {
-                $useDefault[self::DATA_SOURCE][$containerIndex][$fieldIndex] = 0;
+            if (isset($item['use_default'])) {
+                $useDefault[self::DATA_SOURCE][$containerIndex][$fieldIndex] = $item['use_default'];
             }
 
-            if (false === $state) {
-                $configData[$containerIndex][$fieldIndex] = [];
+            if (!isset($item['serialized']) || false === $item['serialized']) {
                 continue;
             }
 
@@ -121,33 +132,20 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
 
     /**
      * @inheritDoc
+     * @throws \Exception
      */
     public function modifyMeta(array $meta): array
     {
-        return $this->generateMetaData($meta);
-    }
-
-    /**
-     * @param array $meta
-     * @return array
-     * @throws \Exception
-     */
-    private function generateMetaData(array $meta): array
-    {
         $this->meta = $meta;
         $requestParams = $this->request->getParams();
-        $entity = $requestParams[ConfigScopeInterface::REQUEST_TYPE_ID] ?? null;
-        $componentName = self::FORM_PREFIX . $entity . self::FORM_SUFFIX;
+        $this->profileTypeId = $requestParams[ConfigScopeInterface::REQUEST_TYPE_ID] ?? null;
+        $componentName = self::FORM_PREFIX . $this->profileTypeId . self::FORM_SUFFIX;
         $metaData = $this->metadataPool->get($componentName);
         $metaData = $metaData['children'][self::DATA_SOURCE]['children'] ?? [];
 
-        foreach ($metaData as $fieldSetName => $fieldSet) {
-            foreach ($fieldSet['children'] ?? [] as $fieldName => $field) {
-                $items = $field['arguments']['data']['item']['config']['item'] ?? [];
-                $configPath = $entity . '/' . $fieldSetName . '/' . $fieldName;
-
-                $this->generateScopedMetaData($items, $fieldSetName, $fieldName);
-                $this->collectSerializedData($items, $configPath);
+        foreach ($metaData as $fieldSetName => $data) {
+            foreach ($data['children'] ?? [] as $fieldName => $items) {
+                $this->processModifyDataComponent($fieldSetName, $fieldName, $items);
             }
         }
 
@@ -155,60 +153,136 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     }
 
     /**
+     * @param string $fieldSetName
+     * @param string $fieldName
+     * @param array $items
+     * @return void
+     * @throws \Exception
+     */
+    private function processModifyDataComponent(string $fieldSetName, string $fieldName, array $items): void
+    {
+        if (!$this->canProcessModifyDataComponent($items)) {
+            return;
+        }
+
+        $componentType = $this->retrieveComponentType($items);
+
+        if ($componentType === 'group') {
+            $this->processModifyDataComponentGroup($items['children'] ?? [], $fieldSetName, $fieldName);
+        } else {
+            $this->processModifyDataComponentGroup([$fieldName => $items], $fieldSetName);
+        }
+    }
+
+    /**
+     * @param array $items
+     * @param string $fieldSetName
+     * @param string|null $groupName
+     * @return void
+     * @throws \Exception
+     */
+    private function processModifyDataComponentGroup(
+        array $items,
+        string $fieldSetName,
+        ?string $groupName = null
+    ): void
+    {
+        foreach ($items as $fieldName => $fieldItems) {
+            $configData = $this->retrieveItemConfig($fieldItems);
+            $configPath = $this->getConfigPath($fieldSetName, $fieldName);
+
+            if (!$this->canProcessModifyDataComponent($fieldItems)) {
+                continue;
+            }
+
+            $configMetadata = $this->generateScopedMetaData($fieldItems, $fieldSetName, $fieldName, $groupName);
+
+            if ($configMetadata) {
+                $groupPath = $groupName ? "$groupName/children/" : null;
+                $path = "$this->dataSource/children/$fieldSetName/children/$groupPath$fieldName/arguments/data/config";
+                if ($this->arrayManager->exists($path, $this->meta)) {
+                    $this->meta = $this->arrayManager->merge(
+                        $path,
+                        $this->meta,
+                        $configMetadata
+                    );
+                } else {
+                    $this->meta = $this->arrayManager->set(
+                        $path,
+                        $this->meta,
+                        $configMetadata
+                    );
+                }
+            }
+
+            $this->generateDataModifyRequest($configData, $configPath);
+        }
+    }
+
+    /**
      * @param array $data
      * @param string $fieldSetName
      * @param string $fieldName
-     * @return void
+     * @param string|null $groupName
+     * @return array
      * @throws \Exception
      */
     private function generateScopedMetaData(
         array $data,
         string $fieldSetName,
-        string $fieldName
-    ): void {
-        $entity = $this->getEntityTypeValueFromRequest();
+        string $fieldName,
+        ?string $groupName = null
+    ): array
+    {
+        $configData = $this->retrieveItemConfig($data);
+
         if ($this->configScope->isCurrentScopeDefault()
-            || !$entity
-            || !$scope = $this->parseScopeCode($data)
+            || !$scope = $this->parseScopeCode($configData)
         ) {
-            return;
+            return [];
         }
 
-        $configPath = $entity . '/' . $fieldSetName . '/' . $fieldName;
-        $isDisabled = $this->configScope->isDefaultValue($configPath);
-        $isDynamicRows = isset($data['componentType']['value']) && $data['componentType']['value'] === 'dynamicRows';
+        $configPath = $this->getConfigPath($fieldSetName, $fieldName);
+        $componentType = $this->retrieveComponentType($data);
+        $isDynamicRows = $componentType === 'dynamicRows';
         $itemConfig = [];
-        foreach ($data as $index => $item) {
-            if (!$this->getScopeValueFromRequest($scope)) {
-                $itemConfig['visible'] = false;
-                continue;
-            }
+
+        if ($scope !== $this->configScope->getCurrentScope()) {
+            $itemConfig['disabled'] = true;
 
             if ($isDynamicRows) {
-                continue;
+                $this->disableChildComponents($data, $fieldSetName, $fieldName, $groupName);
             }
 
+            return $itemConfig;
+        }
+
+        foreach ($configData as $index => $item) {
             if (isset($item['value'])) {
-                $itemConfig[$index] = $item['value'];
+                $value = $item['value'];
+
+                if (($item['xsi:type'] ?? null) === 'boolean') {
+                    $value = !($value === 'false');
+                }
+
+                $itemConfig[$index] = $value;
             }
 
             if (isset($item['item']['required-entry'])) {
                 $itemConfig['required'] = 1;
                 $itemConfig[$index]['required-entry'] = 1;
             }
-
-            if (in_array($scope, [StoreScopeInterface::SCOPE_STORE, StoreScopeInterface::SCOPE_WEBSITE])) {
-                $itemConfig['disabled'] = $isDisabled;
-            }
-
-            $itemConfig['component'] = self::DATA_SOURCE_COMPONENT_TEMPLATE;
-            $itemConfig['service']['template'] = self::DATA_SOURCE_SCOPE_TEMPLATE;
         }
 
-        if ($itemConfig) {
-            $this->meta[self::DATA_SOURCE]['children'][$fieldSetName]['children'][$fieldName]['arguments']['data']
-            ['config'] = $itemConfig;
+        $isDisabled = $this->configScope->isDefaultValue($configPath);
+        $itemConfig['disabled'] = $isDisabled;
+        $itemConfig['service']['template'] = 'ui/form/element/helper/service';
+
+        if ($isDynamicRows && $isDisabled) {
+            $this->disableChildComponents($data, $fieldSetName, $fieldName, $groupName);
         }
+
+        return $itemConfig;
     }
 
     /**
@@ -217,28 +291,131 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
      * @return void
      * @throws \Exception
      */
-    private function collectSerializedData(array $data, $configPath): void
+    private function generateDataModifyRequest(array $data, $configPath): void
     {
-        if (isset($data['componentType']['value']) && $data['componentType']['value'] === 'dynamicRows') {
-            $this->serializedData[$configPath] = $this->configScope->isCurrentScopeDefault()
-                || (
-                    $this->getScopeValueFromRequest($this->parseScopeCode($data))
-                    && !$this->configScope->isDefaultValue($configPath)
-                );
+        $scopeLabel = $this->parseScopeCode($data);
+
+        if (($data['componentType']['value'] ?? null) === 'dynamicRows'
+            || (isset($data['isDataSerialized']['value']) && $data['isDataSerialized']['value'] !== 'false')
+        ) {
+            $this->modifyDataRequest[$configPath]['serialized'] = true;
         }
 
-        if (isset($data['isDataSerialized']['value']) && 'false' !== $data['isDataSerialized']['value']) {
-            $this->serializedData[$configPath] = true;
+        if ($scopeLabel === $this->configScope->getCurrentScope()) {
+            $this->modifyDataRequest[$configPath]['use_default'] = $this->configScope->isCurrentScopeDefault()
+                || ($this->getScopeValueFromRequest($scopeLabel) && !$this->configScope->isDefaultValue($configPath));
         }
     }
 
     /**
      * @param array $data
+     * @param string $fieldSetName
+     * @param string $fieldName
+     * @param string|null $groupName
+     * @return void
+     */
+    private function disableChildComponents(
+        array $data,
+        string $fieldSetName,
+        string $fieldName,
+        ?string $groupName = null
+    ): void
+    {
+        foreach ($data['children']['record']['children'] ?? [] as $itemFieldName => $itemData) {
+            $config = [];
+            foreach ($this->retrieveItemConfig($itemData) as $index => $item) {
+                if (isset($item['value'])) {
+                    $value = $item['value'];
+
+                    if (($item['xsi:type'] ?? null) === 'boolean') {
+                        $value = !($value === 'false');
+                    }
+
+                    $config[$index] = $value;
+                }
+
+                if (isset($item['item']['required-entry'])) {
+                    $config['required'] = 1;
+                    $config[$index]['required-entry'] = 1;
+                }
+
+                $config['disabled'] = 1;
+            }
+
+            $path = [self::DATA_SOURCE, 'children', $fieldSetName, 'children', $fieldName, 'children'];
+
+            if (null !== $groupName) {
+                array_push($path, $fieldName, 'children');
+            }
+
+            array_push($path, $itemFieldName, 'arguments', 'data', 'config');
+            $path = implode('/', $path);
+
+            if ($this->arrayManager->exists($path, $this->meta)) {
+                $this->meta = $this->arrayManager->merge($path, $this->meta, $config);
+            } else {
+                $this->meta = $this->arrayManager->set($path, $this->meta, $config);
+            }
+        }
+    }
+
+    /**
+     * @param array $data
+     * @param string|null $index
+     * @return array|string|null
+     */
+    private function retrieveItemConfig(array $data, ?string $index = null): array|string|null
+    {
+        return null !== $index
+            ? ($data['arguments']['data']['item']['config']['item'][$index]['value'] ?? null)
+            : ($data['arguments']['data']['item']['config']['item'] ?? []);
+    }
+
+    /**
+     * @param array $data
+     * @return string|null
+     */
+    private function retrieveComponentName(array $data): ?string
+    {
+        return $data['component']['value'] ?? null;
+    }
+
+    /**
+     * @param array $data
+     * @return string|null
+     */
+    private function retrieveComponentTemplate(array $data): ?string
+    {
+        return $data['template']['value'] ?? null;
+    }
+
+    /**
+     * @param array $data
+     * @return string|null
+     */
+    private function retrieveComponentType(array $data): ?string
+    {
+        return $data['arguments']['data']['item']['type']['value']
+            ?? $this->retrieveItemConfig($data, 'componentType');
+    }
+
+    /**
+     * @param array $data
+     * @return string|null
+     */
+    private function retrieveFormElementName(array $data): ?string
+    {
+        return $data['formElement']['value'] ?? null;
+    }
+
+    /**
+     * @param string $fieldSetName
+     * @param string $fieldName
      * @return string
      */
-    private function parseScopeCode(array $data): string
+    private function getConfigPath(string $fieldSetName, string $fieldName): string
     {
-        return str_replace(['[', ']'], '', $data['scopeLabel']['value'] ?? '');
+        return "{$this->profileTypeId}/$fieldSetName/$fieldName";
     }
 
     /**
@@ -256,5 +433,41 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     private function getScopeValueFromRequest(string $scopeCode): int
     {
         return (int) $this->request->getParam($scopeCode, 0);
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    private function parseScopeCode(array $data): string
+    {
+        return str_replace(['[', ']'], '', $data['scopeLabel']['value'] ?? '');
+    }
+
+    /**
+     * @param array $componentData
+     * @return bool
+     */
+    private function canProcessModifyDataComponent(array $componentData): bool
+    {
+        $configData = $this->retrieveItemConfig($componentData);
+        $componentName = $this->retrieveComponentName($configData);
+        $componentTemplate = $this->retrieveComponentTemplate($configData);
+
+        if ($componentTemplate === 'ui/form/components/button/container') {
+            return false;
+        }
+
+        if (in_array(
+            $componentName,
+            [
+                'Magento_Ui/js/modal/modal-component',
+                'SoftCommerce_PlentyProfile/js/components/create-external-entity-button'
+            ]
+        )) {
+            return false;
+        }
+
+        return true;
     }
 }
