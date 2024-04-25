@@ -272,15 +272,27 @@ abstract class Service
 
     /**
      * @param array $services
+     * @param bool $preserveKey
      * @return array
      */
-    protected function initServices(array $services): array
+    protected function initServices(array $services, bool $preserveKey = false): array
     {
         usort($services, function (array $a, array $b) {
             return $this->getSortOrder($a) <=> $this->getSortOrder($b);
         });
 
-        return array_column($services, 'class');
+        if (false === $preserveKey) {
+            return array_column($services, 'class');
+        }
+
+        $result = [];
+        foreach ($services as $service) {
+            if (isset($service['typeId'])) {
+                $result[$service['typeId']] = $service['class'] ?? null;
+            }
+        }
+
+        return $result;
     }
 
     /**
