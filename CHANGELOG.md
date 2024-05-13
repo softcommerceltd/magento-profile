@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.4.1
+- **Enhancement**: Preserve an array key for context services in `SoftCommerce\Profile\Model\ServiceAbstract\Service::initServices` [#4]
+
 ### Version 1.4.0
 - **Feature**: Introduced functionality to support UI form scoped data [#3]
 - **Compatibility**: Introduced support for PHP 8.3 [#2]

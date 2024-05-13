@@ -248,7 +248,7 @@ abstract class Service
     }
 
     /**
-     * @param ServiceInterface $context
+     * @param ServiceInterface|self $context
      * @return $this
      */
     public function init($context): static
@@ -259,8 +259,8 @@ abstract class Service
     }
 
     /**
-     * @param ServiceInterface $context
-     * @param ServiceInterface[] $instances
+     * @param ServiceInterface|self $context
+     * @param ServiceInterface[]|self[] $instances
      */
     protected function initTypeInstances($context, array $instances): void
     {
@@ -271,7 +271,7 @@ abstract class Service
     }
 
     /**
-     * @param array $services
+     * @param ServiceInterface[]|self[] $services
      * @param bool $preserveKey
      * @return array
      */

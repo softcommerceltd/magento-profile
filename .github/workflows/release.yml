@@ -12,11 +12,9 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: 1.4.0 [CE|EE|ECE 2.4.0-2.4.7] 21 Mar 2024
-          tag_name: 1.4.0
+          name: 1.4.1 [CE|EE|ECE 2.4.0-2.4.7] 13 May 2024
+          tag_name: 1.4.1
           body: |-
-            ### softcommerce/module-profile [1.4.0]
-            - **Feature**: Introduced functionality to support UI form scoped data [#3]
-            - **Compatibility**: Introduced support for PHP 8.3 [#2]
+            - **Enhancement**: Preserve an array key for context services in `SoftCommerce\Profile\Model\ServiceAbstract\Service::initServices` [#4]
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
