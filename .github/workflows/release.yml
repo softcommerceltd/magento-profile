@@ -12,9 +12,10 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          name: 1.4.1 [CE|EE|ECE 2.4.0-2.4.7] 13 May 2024
-          tag_name: 1.4.1
+          name: 1.4.2 [CE|EE|ECE 2.4.0-2.4.7] 25 Sep 2024
+          tag_name: 1.4.2
           body: |-
-            - **Enhancement**: Preserve an array key for context services in `SoftCommerce\Profile\Model\ServiceAbstract\Service::initServices` [#4]
+            ### softcommerce/module-profile [1.4.2]
+            - **Enhancement**: Add an option to include a menu with item that depends on URL and confirmation message for profile actions button [#25]
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

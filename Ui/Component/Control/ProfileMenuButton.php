@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace SoftCommerce\Profile\Ui\Component\Control;
 
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 use Magento\Ui\Component\Control\Container;
 
@@ -43,6 +44,11 @@ class ProfileMenuButton implements ButtonProviderInterface
     protected ?int $sortOrder;
 
     /**
+     * @var UrlInterface
+     */
+    protected UrlInterface $urlBuilder;
+
+    /**
      * @param RequestInterface $request
      * @param array $actionData
      * @param string|null $aclResource
@@ -51,12 +57,14 @@ class ProfileMenuButton implements ButtonProviderInterface
      */
     public function __construct(
         RequestInterface $request,
+        UrlInterface $urlBuilder,
         array $actionData,
         ?string $aclResource = null,
         ?string $label = null,
         ?int $sortOrder = null
     ) {
         $this->request = $request;
+        $this->urlBuilder = $urlBuilder;
         $this->actionData = $actionData;
         $this->aclResource = $aclResource;
         $this->label = $label;
@@ -97,17 +105,28 @@ class ProfileMenuButton implements ButtonProviderInterface
             return [];
         }
 
+        usort($this->actionData, function (array $a, array $b) {
+            return $this->getSortOrder($a) <=> $this->getSortOrder($b);
+        });
+
         $result = [];
         $i = 0;
-        foreach ($this->actionData ?: [] as $typeId => $itemData) {
+        foreach ($this->actionData as $typeId => $itemData) {
             $targetName = $itemData['targetName'] ?? null;
-            if (!$targetName || !$actionName = $itemData['actionName'] ?? null) {
+            $actionName = $itemData['actionName'] ?? null;
+            $url = $itemData['url'] ?? null;
+
+            if (!$targetName && !$actionName && !$url) {
                 continue;
             }
 
             $result[$typeId] = [
                 'label' => __($itemData['label'] ?? $actionName),
-                'data_attribute' => [
+                'sort_order' => $i,
+            ];
+
+            if ($actionName) {
+                $result[$typeId]['data_attribute'] = [
                     'mage-init' => [
                         'buttonAdapter' => [
                             'actions' => [
@@ -121,9 +140,13 @@ class ProfileMenuButton implements ButtonProviderInterface
                             ],
                         ],
                     ],
-                ],
-                'sort_order' => isset($itemData['sort_order']) ? (int) $itemData['sort_order'] : $i,
-            ];
+                ];
+            }
+
+            if ($url) {
+                $result[$typeId]['onclick'] = $this->getOnclickUrl($url, $itemData['confirm'] ?? null);
+            }
+
             $i++;
         }
 
@@ -143,6 +166,32 @@ class ProfileMenuButton implements ButtonProviderInterface
             $extraParams['popup'] = 1;
         }
         return $extraParams;
+    }
+
+    /**
+     * @param string $path
+     * @param string|null $confirm
+     * @return string
+     */
+    private function getOnclickUrl(string $path, ?string $confirm = null): string
+    {
+        $message = null;
+        if ($confirm) {
+            $message = __($confirm);
+        }
+
+        $url = $this->urlBuilder->getUrl($path);
+
+        return $message ? "deleteConfirm('$message', '$url')" : $url;
+    }
+
+    /**
+     * @param array $item
+     * @return int
+     */
+    private function getSortOrder(array $item): int
+    {
+        return (int) ($item['sort_order'] ?? 0);
     }
 
     /**

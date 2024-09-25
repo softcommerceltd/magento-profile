@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.4.2
+- **Enhancement**: Add an option to include a menu with item that depends on URL and confirmation message for profile actions button [#25]
+
 ### Version 1.4.1
 - **Enhancement**: Preserve an array key for context services in `SoftCommerce\Profile\Model\ServiceAbstract\Service::initServices` [#4]
 
