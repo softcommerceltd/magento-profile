@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.4.3
+- **Enhancement**: Added profile config data to event dispatcher for save before/after events.
+
 ### Version 1.4.2
 - **Enhancement**: Add an option to include a menu with item that depends on URL and confirmation message for profile actions button [#25]
 

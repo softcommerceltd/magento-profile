@@ -138,7 +138,7 @@ class Save extends ProfileController
     /**
      * @return void
      */
-    private function saveProfileConfig()
+    private function saveProfileConfig(): void
     {
         if (!$this->getRequest()->getParam(ProfileConfigData::DATA_SOURCE)) {
             return;
@@ -155,7 +155,7 @@ class Save extends ProfileController
 
             $this->_eventManager->dispatch(
                 'softcommerce_profile_config_save_after',
-                ['configData' => $configData, 'request' => $this->getRequest()]
+                ['config_data' => $configData, 'request' => $this->getRequest()]
             );
         } catch (\Exception $e) {
             $this->messageManager->addExceptionMessage(
