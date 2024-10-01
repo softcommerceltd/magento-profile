@@ -182,7 +182,9 @@ class ProfileMenuButton implements ButtonProviderInterface
 
         $url = $this->urlBuilder->getUrl($path);
 
-        return $message ? "deleteConfirm('$message', '$url')" : $url;
+        return $message
+            ? "confirmSetLocation('$message', '$url')"
+            : "setLocation('$url')";
     }
 
     /**

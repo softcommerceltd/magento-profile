@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.4.4
+- **Enhancement**: Applied a fix to profile menu items on listing pages.
+
 ### Version 1.4.3
 - **Enhancement**: Added profile config data to event dispatcher for save before/after events.
 
