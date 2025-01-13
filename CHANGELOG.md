@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.4.5
+- **Enhancement**: Included `servicepoint` type to account for `pakshop` facility.
+
 ### Version 1.4.4
 - **Enhancement**: Applied a fix to profile menu items on listing pages.
 
