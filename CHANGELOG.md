@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2025-07-14
+
 ## [1.4.5] - 2024-05-13
 ### Changed
 - **Enhancement**: Included `servicepoint` type to account for `pakshop` facility.
