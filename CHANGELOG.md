@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 2025-07-24
+### Changed
+- The metapackage release notes are now properly extracting and formatting the module changes from the CHANGELOG.md file
+
 ## [2.0.1] - 2025-07-14
 
 ## [1.4.5] - 2024-05-13
