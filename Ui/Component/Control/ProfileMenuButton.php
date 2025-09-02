@@ -144,7 +144,8 @@ class ProfileMenuButton implements ButtonProviderInterface
             }
 
             if ($url) {
-                $result[$typeId]['onclick'] = $this->getOnclickUrl($url, $itemData['confirm'] ?? null);
+                $params = $itemData['params'] ?? [];
+                $result[$typeId]['onclick'] = $this->getOnclickUrl($url, $itemData['confirm'] ?? null, $params);
             }
 
             $i++;
@@ -171,16 +172,17 @@ class ProfileMenuButton implements ButtonProviderInterface
     /**
      * @param string $path
      * @param string|null $confirm
+     * @param array $params
      * @return string
      */
-    private function getOnclickUrl(string $path, ?string $confirm = null): string
+    private function getOnclickUrl(string $path, ?string $confirm = null, array $params = []): string
     {
         $message = null;
         if ($confirm) {
             $message = __($confirm);
         }
 
-        $url = $this->urlBuilder->getUrl($path);
+        $url = $this->urlBuilder->getUrl($path, $params);
 
         return $message
             ? "confirmSetLocation('$message', '$url')"
