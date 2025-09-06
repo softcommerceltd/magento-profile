@@ -128,6 +128,23 @@ abstract class Service
     }
 
     /**
+     * Clear processor-specific data
+     *
+     * @return void
+     *
+     */
+    public function resetState(): void
+    {
+        $this->request =
+        $this->response =
+            [];
+        $this->dataStorage->resetData();
+        $this->requestStorage->resetData();
+        $this->responseStorage->resetData();
+        $this->messageStorage->resetData();
+    }
+
+    /**
      * @return $this
      */
     public function finalize(): static
