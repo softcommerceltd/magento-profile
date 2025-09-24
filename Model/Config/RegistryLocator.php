@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace SoftCommerce\Profile\Model;
+namespace SoftCommerce\Profile\Model\Config;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
@@ -35,10 +35,10 @@ class RegistryLocator implements RegistryLocatorInterface
     {}
 
     /**
-     * @return ProfileInterface|Profile
+     * @return ProfileInterface
      * @throws LocalizedException
      */
-    public function getProfile()
+    public function getProfile(): ProfileInterface
     {
         if (null !== $this->profile) {
             return $this->profile;
@@ -52,10 +52,10 @@ class RegistryLocator implements RegistryLocatorInterface
     }
 
     /**
-     * @return StoreInterface|mixed|null
+     * @return StoreInterface
      * @throws LocalizedException
      */
-    public function getStore()
+    public function getStore(): StoreInterface
     {
         if (null !== $this->store) {
             return $this->store;

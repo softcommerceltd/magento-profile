@@ -11,12 +11,13 @@ namespace SoftCommerce\Profile\Model\ServiceAbstract\PostProcessor;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\Core\Framework\DataStorageInterfaceFactory;
+use SoftCommerce\Core\Framework\MessageCollectorInterfaceFactory;
 use SoftCommerce\Core\Framework\MessageStorageInterfaceFactory;
 use SoftCommerce\Core\Logger\LogProcessorInterface;
 use SoftCommerce\Profile\Model\ServiceAbstract\ProcessorInterface;
 use SoftCommerce\Profile\Model\ServiceAbstract\Service;
-use SoftCommerce\ProfileConfig\Model\Config\LogConfigInterface;
-use SoftCommerce\ProfileConfig\Model\Config\LogConfigInterfaceFactory;
+use SoftCommerce\Profile\Model\Config\Type\LogConfigInterface;
+use SoftCommerce\Profile\Model\Config\Type\LogConfigInterfaceFactory;
 
 /**
  * @inheritDoc
@@ -27,39 +28,35 @@ class DataLog extends Service implements ProcessorInterface
     private const RESPONSE = '__RESPONSE__';
 
     /**
-     * @var LogProcessorInterface
-     */
-    private LogProcessorInterface $logger;
-
-    /**
      * @var LogConfigInterface|null
      */
     private ?LogConfigInterface $logConfig = null;
 
     /**
-     * @var LogConfigInterfaceFactory
-     */
-    private LogConfigInterfaceFactory $logConfigFactory;
-
-    /**
      * @param LogConfigInterfaceFactory $logConfigFactory
      * @param LogProcessorInterface $logger
      * @param DataStorageInterfaceFactory $dataStorageFactory
+     * @param MessageCollectorInterfaceFactory $messageCollectorFactory
      * @param MessageStorageInterfaceFactory $messageStorageFactory
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param array $data
      */
     public function __construct(
-        LogConfigInterfaceFactory $logConfigFactory,
-        LogProcessorInterface $logger,
+        private LogConfigInterfaceFactory $logConfigFactory,
+        private LogProcessorInterface $logger,
         DataStorageInterfaceFactory $dataStorageFactory,
+        MessageCollectorInterfaceFactory $messageCollectorFactory,
         MessageStorageInterfaceFactory $messageStorageFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         array $data = []
     ) {
-        $this->logConfigFactory = $logConfigFactory;
-        $this->logger = $logger;
-        parent::__construct($dataStorageFactory, $messageStorageFactory, $searchCriteriaBuilder, $data);
+        parent::__construct(
+            $dataStorageFactory,
+            $messageCollectorFactory,
+            $messageStorageFactory,
+            $searchCriteriaBuilder,
+            $data
+        );
     }
 
     /**

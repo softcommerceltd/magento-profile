@@ -23,7 +23,7 @@ use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeStorageInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier\ProfileConfigData;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier\ProfileEntityData;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc

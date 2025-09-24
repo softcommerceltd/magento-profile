@@ -11,7 +11,7 @@ namespace SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc

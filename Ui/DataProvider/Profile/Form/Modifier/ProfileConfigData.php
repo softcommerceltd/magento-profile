@@ -16,7 +16,7 @@ use SoftCommerce\Profile\Model\RegistryLocatorInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPoolInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeInterfaceFactory;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc

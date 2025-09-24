@@ -10,6 +10,7 @@ namespace SoftCommerce\Profile\Model\ServiceAbstract;
 
 use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\Core\Framework\DataStorageInterface;
+use SoftCommerce\Core\Framework\MessageCollectorInterface;
 use SoftCommerce\Core\Framework\MessageStorageInterface;
 
 /**
@@ -30,6 +31,11 @@ interface ServiceInterface
      * @return DataStorageInterface
      */
     public function getDataStorage(): DataStorageInterface;
+
+    /**
+     * @return MessageCollectorInterface
+     */
+    public function getMessageCollector(): MessageCollectorInterface;
 
     /**
      * @return MessageStorageInterface

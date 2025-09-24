@@ -3,10 +3,7 @@
     "description": "SoftCommerce -- Magento: Profile Module.",
     "require": {
         "php": "~8.0.0||~8.1.0||~8.2.0||~8.3.0||~8.4.0",
-        "magento/module-store": "^101.0",
-        "magento/module-ui": "^101",
-        "softcommerce/module-core": "*",
-        "softcommerce/module-profile-history": "*"
+        "softcommerce/module-core": "*"
     },
     "type": "magento2-module",
     "license": [

@@ -17,7 +17,7 @@ use SoftCommerce\Profile\Api\ProfileRepositoryInterface;
 use SoftCommerce\Profile\Model\ProfileFactory;
 use SoftCommerce\Profile\Model\RegistryLocatorInterface;
 use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc

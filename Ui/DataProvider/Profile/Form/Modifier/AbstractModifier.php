@@ -13,7 +13,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\ArrayManager;
 use SoftCommerce\Profile\Model\RegistryLocatorInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPoolInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * Class AbstractModifier

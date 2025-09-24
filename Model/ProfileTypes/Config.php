@@ -16,17 +16,10 @@ use Magento\Framework\Config\DataInterface;
 class Config implements ConfigInterface
 {
     /**
-     * @var DataInterface
-     */
-    private DataInterface $config;
-
-    /**
      * @param DataInterface $config
      */
-    public function __construct(DataInterface $config)
-    {
-        $this->config = $config;
-    }
+    public function __construct(private DataInterface $config)
+    {}
 
     /**
      * @inheritDoc

@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace SoftCommerce\Profile\Model;
 
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
-use SoftCommerce\Profile\Model\ResourceModel;
 
 /**
  * @inheritDoc
@@ -22,17 +21,10 @@ class GetProfileDataByTypeId implements GetProfileDataByTypeIdInterface
     private array $data = [];
 
     /**
-     * @var ResourceModel\Profile
-     */
-    private ResourceModel\Profile $resource;
-
-    /**
      * @param ResourceModel\Profile $resource
      */
-    public function __construct(ResourceModel\Profile $resource)
-    {
-        $this->resource = $resource;
-    }
+    public function __construct(private ResourceModel\Profile $resource)
+    {}
 
     /**
      * @inheritDoc

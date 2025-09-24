@@ -10,6 +10,7 @@ namespace SoftCommerce\Profile\Model\ServiceAbstract;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use SoftCommerce\Core\Framework\DataStorageInterfaceFactory;
+use SoftCommerce\Core\Framework\MessageCollectorInterfaceFactory;
 use SoftCommerce\Core\Framework\MessageStorageInterfaceFactory;
 
 /**
@@ -24,6 +25,7 @@ class Processor extends Service implements ServiceInterface
 
     /**
      * @param DataStorageInterfaceFactory $dataStorageFactory
+     * @param MessageCollectorInterfaceFactory $messageCollectorFactory
      * @param MessageStorageInterfaceFactory $messageStorageFactory
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param array $data
@@ -31,13 +33,20 @@ class Processor extends Service implements ServiceInterface
      */
     public function __construct(
         DataStorageInterfaceFactory $dataStorageFactory,
+        MessageCollectorInterfaceFactory $messageCollectorFactory,
         MessageStorageInterfaceFactory $messageStorageFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         array $data = [],
         array $processors = []
     ) {
         $this->processors = $this->initServices($processors);
-        parent::__construct($dataStorageFactory, $messageStorageFactory, $searchCriteriaBuilder, $data);
+        parent::__construct(
+            $dataStorageFactory,
+            $messageCollectorFactory,
+            $messageStorageFactory,
+            $searchCriteriaBuilder,
+            $data
+        );
     }
 
     /**

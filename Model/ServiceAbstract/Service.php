@@ -12,6 +12,8 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\Core\Framework\DataStorageInterface;
 use SoftCommerce\Core\Framework\DataStorageInterfaceFactory;
+use SoftCommerce\Core\Framework\MessageCollectorInterface;
+use SoftCommerce\Core\Framework\MessageCollectorInterfaceFactory;
 use SoftCommerce\Core\Framework\MessageStorageInterface;
 use SoftCommerce\Core\Framework\MessageStorageInterfaceFactory;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
@@ -35,16 +37,6 @@ abstract class Service
     protected array $data = [];
 
     /**
-     * @var DataStorageInterfaceFactory
-     */
-    protected DataStorageInterfaceFactory $dataStorageFactory;
-
-    /**
-     * @var MessageStorageInterfaceFactory
-     */
-    protected MessageStorageInterfaceFactory $messageStorageFactory;
-
-    /**
      * @var DataStorageInterface
      */
     protected $dataStorage;
@@ -58,6 +50,11 @@ abstract class Service
      * @var DataStorageInterface
      */
     protected $requestStorage;
+
+    /**
+     * @var MessageCollectorInterface
+     */
+    protected MessageCollectorInterface $messageCollector;
 
     /**
      * @var MessageStorageInterface
@@ -80,35 +77,30 @@ abstract class Service
     protected array $request = [];
 
     /**
-     * @var SearchCriteriaBuilder
-     */
-    protected SearchCriteriaBuilder $searchCriteriaBuilder;
-
-    /**
      * @var string
      */
     protected string $typeId = '';
 
     /**
      * @param DataStorageInterfaceFactory $dataStorageFactory
+     * @param MessageCollectorInterfaceFactory $messageCollectorFactory
      * @param MessageStorageInterfaceFactory $messageStorageFactory
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param array $data
      */
     public function __construct(
-        DataStorageInterfaceFactory $dataStorageFactory,
-        MessageStorageInterfaceFactory $messageStorageFactory,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
+        protected DataStorageInterfaceFactory $dataStorageFactory,
+        protected MessageCollectorInterfaceFactory $messageCollectorFactory,
+        protected MessageStorageInterfaceFactory $messageStorageFactory,
+        protected SearchCriteriaBuilder $searchCriteriaBuilder,
         array $data = []
     ) {
-        $this->dataStorageFactory = $dataStorageFactory;
-        $this->messageStorageFactory = $messageStorageFactory;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->data = $data;
         $this->dataStorage = $this->dataStorageFactory->create();
+        $this->messageCollector = $this->messageCollectorFactory->create();
+        $this->messageStorage = $this->messageStorageFactory->create();
         $this->requestStorage = $this->dataStorageFactory->create();
         $this->responseStorage = $this->dataStorageFactory->create();
-        $this->messageStorage = $this->messageStorageFactory->create();
         $this->profileId = $data[ProfileInterface::PROFILE_ID] ?? null;
     }
 
@@ -181,6 +173,14 @@ abstract class Service
     public function getDataStorage(): DataStorageInterface
     {
         return $this->dataStorage;
+    }
+
+    /**
+     * @return MessageCollectorInterface
+     */
+    public function getMessageCollector(): MessageCollectorInterface
+    {
+        return $this->messageCollector;
     }
 
     /**

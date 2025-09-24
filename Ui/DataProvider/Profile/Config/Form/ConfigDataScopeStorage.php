@@ -13,9 +13,9 @@ use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier\ProfileConfigData;
-use SoftCommerce\ProfileConfig\Api\Data\ConfigInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
-use SoftCommerce\ProfileConfig\Model\ResourceModel;
+use SoftCommerce\Profile\Api\Data\ConfigInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\ResourceModel;
 
 /**
  * @inheritDoc
