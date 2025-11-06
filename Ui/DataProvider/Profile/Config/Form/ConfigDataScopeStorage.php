@@ -13,9 +13,9 @@ use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier\ProfileConfigData;
-use SoftCommerce\ProfileConfig\Api\Data\ConfigInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
-use SoftCommerce\ProfileConfig\Model\ResourceModel;
+use SoftCommerce\Profile\Api\Data\ConfigInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\ResourceModel;
 
 /**
  * @inheritDoc
@@ -23,33 +23,15 @@ use SoftCommerce\ProfileConfig\Model\ResourceModel;
 class ConfigDataScopeStorage implements ConfigDataScopeStorageInterface
 {
     /**
-     * @var ConfigScopeInterface
-     */
-    private ConfigScopeInterface $configScope;
-
-    /**
-     * @var ResourceModel\Config
-     */
-    private ResourceModel\Config $resource;
-
-    /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
-
-    /**
      * @param ConfigScopeInterface $configScope
      * @param ResourceModel\Config $resource
      * @param SerializerInterface $serializer
      */
     public function __construct(
-        ConfigScopeInterface $configScope,
-        ResourceModel\Config $resource,
-        SerializerInterface $serializer
+        private readonly ConfigScopeInterface $configScope,
+        private readonly ResourceModel\Config $resource,
+        private readonly SerializerInterface $serializer
     ) {
-        $this->configScope = $configScope;
-        $this->resource = $resource;
-        $this->serializer = $serializer;
     }
 
     /**

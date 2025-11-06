@@ -12,14 +12,7 @@
             <block class="Magento\Backend\Block\Template" name="adminhtml.profile.navigation.container" template="SoftCommerce_Profile::profile/navigation/container.phtml" before="-"/>
         </referenceContainer>
         <referenceBlock name="adminhtml.profile.navigation.container">
-            <block class="SoftCommerce\Profile\Block\Adminhtml\Profile\Navigation" name="adminhtml.profile.navigation" template="SoftCommerce_Profile::profile/navigation.phtml" after="adminhtml.system.config.switcher">
-                <arguments>
-                    <argument name="menu_items" xsi:type="array">
-                        <item name="history" xsi:type="string">softcommerce/profileHistory</item>
-                        <item name="schedules" xsi:type="string">softcommerce/profileSchedule</item>
-                    </argument>
-                </arguments>
-            </block>
+            <block class="SoftCommerce\Profile\Block\Adminhtml\Profile\Navigation" name="adminhtml.profile.navigation" template="SoftCommerce_Profile::profile/navigation.phtml" after="adminhtml.system.config.switcher"/>
         </referenceBlock>
     </body>
 </page>

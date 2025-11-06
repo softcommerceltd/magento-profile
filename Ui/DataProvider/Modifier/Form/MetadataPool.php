@@ -20,24 +20,9 @@ use Magento\Ui\Config\ReaderFactory;
 class MetadataPool implements MetadataPoolInterface
 {
     /**
-     * @var CacheInterface
-     */
-    private CacheInterface $cache;
-
-    /**
      * @var array
      */
     private $data;
-
-    /**
-     * @var ReaderFactory
-     */
-    private ReaderFactory $readerFactory;
-
-    /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
 
     /**
      * @param CacheInterface $cache
@@ -45,13 +30,10 @@ class MetadataPool implements MetadataPoolInterface
      * @param SerializerInterface $serializer
      */
     public function __construct(
-        CacheInterface $cache,
-        ReaderFactory $readerFactory,
-        SerializerInterface $serializer
+        private readonly CacheInterface $cache,
+        private readonly ReaderFactory $readerFactory,
+        private readonly SerializerInterface $serializer
     ) {
-        $this->cache = $cache;
-        $this->readerFactory = $readerFactory;
-        $this->serializer = $serializer;
     }
 
     /**

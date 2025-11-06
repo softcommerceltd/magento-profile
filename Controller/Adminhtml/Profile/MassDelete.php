@@ -26,11 +26,6 @@ use SoftCommerce\Profile\Model\ResourceModel\Profile\CollectionFactory;
 class MassDelete extends AbstractMassAction
 {
     /**
-     * @var ResourceModel\Profile
-     */
-    private ResourceModel\Profile $resource;
-
-    /**
      * @param Context $context
      * @param Filter $filter
      * @param ResourceModel\Profile $resource
@@ -39,10 +34,9 @@ class MassDelete extends AbstractMassAction
     public function __construct(
         Context $context,
         Filter $filter,
-        ResourceModel\Profile $resource,
+        private readonly ResourceModel\Profile $resource,
         ResourceModel\Profile\CollectionFactory $collectionFactory
     ) {
-        $this->resource = $resource;
         parent::__construct($context, $filter, $collectionFactory);
     }
 

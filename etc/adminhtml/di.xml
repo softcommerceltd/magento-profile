@@ -39,10 +39,6 @@
             <argument name="pool" xsi:type="object">SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier\Pool</argument>
         </arguments>
     </type>
-    <!-- Profile UI metadata pool -->
-    <preference for="SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPoolInterface" type="SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPool"/>
-    <preference for="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeInterface" type="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScope"/>
-    <preference for="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeStorageInterface" type="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeStorage"/>
     <!-- Form Buttons configuration -->
     <virtualType name="SoftCommerce\Profile\Ui\Component\Control\Profile\SaveSplitButton" type="Magento\Backend\Ui\Component\Control\SaveSplitButton">
         <arguments>

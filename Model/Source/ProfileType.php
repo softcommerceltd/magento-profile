@@ -22,16 +22,11 @@ class ProfileType implements OptionSourceInterface
     private ?array $options = null;
 
     /**
-     * @var TypeInstanceOptionsInterface
-     */
-    private TypeInstanceOptionsInterface $typeInstanceOptions;
-
-    /**
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
      */
-    public function __construct(TypeInstanceOptionsInterface $typeInstanceOptions)
-    {
-        $this->typeInstanceOptions = $typeInstanceOptions;
+    public function __construct(
+        private readonly TypeInstanceOptionsInterface $typeInstanceOptions
+    ) {
     }
 
     /**

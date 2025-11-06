@@ -18,11 +18,6 @@ use SoftCommerce\Profile\Model\ProfileTypes\ConfigInterface;
 class TypeInstanceOptions implements TypeInstanceOptionsInterface, OptionSourceInterface
 {
     /**
-     * @var ConfigInterface
-     */
-    private ConfigInterface $config;
-
-    /**
      * @var array|null
      */
     private ?array $types = null;
@@ -30,9 +25,9 @@ class TypeInstanceOptions implements TypeInstanceOptionsInterface, OptionSourceI
     /**
      * @param ConfigInterface $config
      */
-    public function __construct(ConfigInterface $config)
-    {
-        $this->config = $config;
+    public function __construct(
+        private readonly ConfigInterface $config
+    ) {
     }
 
     /**

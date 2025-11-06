@@ -32,27 +32,15 @@ abstract class AbstractMassAction extends Action
     protected string $redirectUrl = '*/*/index';
 
     /**
-     * @var Filter
-     */
-    protected Filter $filter;
-
-    /**
-     * @var CollectionFactory
-     */
-    protected CollectionFactory $collectionFactory;
-
-    /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
     public function __construct(
         Context $context,
-        Filter $filter,
-        CollectionFactory $collectionFactory
+        protected readonly Filter $filter,
+        protected readonly CollectionFactory $collectionFactory
     ) {
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
         parent::__construct($context);
     }
 

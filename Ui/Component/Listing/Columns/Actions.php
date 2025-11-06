@@ -24,24 +24,9 @@ use SoftCommerce\Profile\Model\GetProfileDataByTypeIdInterface;
 class Actions extends Column
 {
     /**
-     * @var Escaper
-     */
-    protected Escaper $escaper;
-
-    /**
-     * @var GetProfileDataByTypeIdInterface
-     */
-    protected GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
-
-    /**
      * @var array
      */
     protected array $profiles = [];
-
-    /**
-     * @var UrlInterface
-     */
-    protected UrlInterface $urlBuilder;
 
     /**
      * @param Escaper $escaper
@@ -53,17 +38,14 @@ class Actions extends Column
      * @param array $data
      */
     public function __construct(
-        Escaper $escaper,
-        GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
-        UrlInterface $urlBuilder,
+        protected readonly Escaper $escaper,
+        protected readonly GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
+        protected readonly UrlInterface $urlBuilder,
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         array $components = [],
         array $data = []
     ) {
-        $this->escaper = $escaper;
-        $this->getProfileDataByTypeId = $getProfileDataByTypeId;
-        $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 

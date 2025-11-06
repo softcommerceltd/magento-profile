@@ -19,11 +19,6 @@ use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
 class Navigation extends Template
 {
     /**
-     * @var TypeInstanceOptionsInterface
-     */
-    protected TypeInstanceOptionsInterface $typeInstanceOptions;
-
-    /**
      * @var string
      */
     protected $_template = 'SoftCommerce_Profile::profile/navigation.phtml';
@@ -34,11 +29,10 @@ class Navigation extends Template
      * @param array $data
      */
     public function __construct(
-        TypeInstanceOptionsInterface $typeInstanceOptions,
+        protected readonly TypeInstanceOptionsInterface $typeInstanceOptions,
         Template\Context $context,
         array $data = []
     ) {
-        $this->typeInstanceOptions = $typeInstanceOptions;
         parent::__construct($context, $data);
     }
 

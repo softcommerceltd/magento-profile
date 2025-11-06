@@ -11,13 +11,12 @@ namespace SoftCommerce\Profile\Controller\Adminhtml;
 use Magento\Backend\App\Action;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\LayoutFactory;
-use Magento\Framework\View\Result\PageFactory;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Api\ProfileRepositoryInterface;
 use SoftCommerce\Profile\Model\ProfileFactory;
 use SoftCommerce\Profile\Model\RegistryLocatorInterface;
 use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc
@@ -40,44 +39,9 @@ abstract class Profile extends Action
     protected const XML_PATH_CLIENT_ID = '/client_config/client_id';
 
     /**
-     * @var ConfigScopeInterface
-     */
-    protected ConfigScopeInterface $configScope;
-
-    /**
-     * @var Registry
-     */
-    protected Registry $coreRegistry;
-
-    /**
      * @var ProfileInterface|Profile
      */
     protected $currentProfile;
-
-    /**
-     * @var ProfileFactory
-     */
-    protected ProfileFactory $profileFactory;
-
-    /**
-     * @var ProfileRepositoryInterface
-     */
-    protected ProfileRepositoryInterface $profileRepository;
-
-    /**
-     * @var LayoutFactory
-     */
-    protected LayoutFactory $resultLayoutFactory;
-
-    /**
-     * @var PageFactory
-     */
-    protected PageFactory $resultPageFactory;
-
-    /**
-     * @var TypeInstanceOptionsInterface
-     */
-    protected TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @param ConfigScopeInterface $configScope
@@ -89,20 +53,14 @@ abstract class Profile extends Action
      * @param Action\Context $context
      */
     public function __construct(
-        ConfigScopeInterface $configScope,
-        Registry $coreRegistry,
-        ProfileFactory $profileFactory,
-        ProfileRepositoryInterface $profileRepository,
-        LayoutFactory $resultLayoutFactory,
-        TypeInstanceOptionsInterface $typeInstanceOptions,
+        protected readonly ConfigScopeInterface $configScope,
+        protected readonly Registry $coreRegistry,
+        protected readonly ProfileFactory $profileFactory,
+        protected readonly ProfileRepositoryInterface $profileRepository,
+        protected readonly LayoutFactory $resultLayoutFactory,
+        protected readonly TypeInstanceOptionsInterface $typeInstanceOptions,
         Action\Context $context
     ) {
-        $this->configScope = $configScope;
-        $this->coreRegistry = $coreRegistry;
-        $this->resultLayoutFactory = $resultLayoutFactory;
-        $this->profileFactory = $profileFactory;
-        $this->profileRepository = $profileRepository;
-        $this->typeInstanceOptions = $typeInstanceOptions;
         parent::__construct($context);
     }
 

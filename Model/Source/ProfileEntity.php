@@ -18,11 +18,6 @@ use SoftCommerce\Profile\Model\GetProfileDataInterface;
 class ProfileEntity implements OptionSourceInterface
 {
     /**
-     * @var GetProfileDataInterface
-     */
-    private GetProfileDataInterface $getProfileData;
-
-    /**
      * @var array|null
      */
     private ?array $options = null;
@@ -30,9 +25,9 @@ class ProfileEntity implements OptionSourceInterface
     /**
      * @param GetProfileDataInterface $getProfileData
      */
-    public function __construct(GetProfileDataInterface $getProfileData)
-    {
-        $this->getProfileData = $getProfileData;
+    public function __construct(
+        private readonly GetProfileDataInterface $getProfileData
+    ) {
     }
 
     /**

@@ -23,23 +23,13 @@ use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeStorageInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier\ProfileConfigData;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Form\Modifier\ProfileEntityData;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc
  */
 class Save extends ProfileController
 {
-    /**
-     * @var ConfigDataScopeStorageInterface
-     */
-    private ConfigDataScopeStorageInterface $configDataScopeStorage;
-
-    /**
-     * @var DataPersistorInterface
-     */
-    private DataPersistorInterface $dataPersistor;
-
     /**
      * @param ConfigDataScopeStorageInterface $configDataScopeStorage
      * @param DataPersistorInterface $dataPersistor
@@ -52,8 +42,8 @@ class Save extends ProfileController
      * @param Action\Context $context
      */
     public function __construct(
-        ConfigDataScopeStorageInterface $configDataScopeStorage,
-        DataPersistorInterface $dataPersistor,
+        private readonly ConfigDataScopeStorageInterface $configDataScopeStorage,
+        private readonly DataPersistorInterface $dataPersistor,
         ConfigScopeInterface $configScope,
         Registry $coreRegistry,
         ProfileFactory $profileFactory,
@@ -62,8 +52,6 @@ class Save extends ProfileController
         TypeInstanceOptionsInterface $typeInstanceOptions,
         Action\Context $context
     ) {
-        $this->configDataScopeStorage = $configDataScopeStorage;
-        $this->dataPersistor = $dataPersistor;
         parent::__construct(
             $configScope,
             $coreRegistry,

@@ -25,36 +25,6 @@ class SwitchProfileFormButton implements ButtonProviderInterface
     private const IMPORT = 'import';
 
     /**
-     * @var string|null
-     */
-    protected ?string $fontName;
-
-    /**
-     * @var GetProfileDataByTypeIdInterface
-     */
-    protected GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
-
-    /**
-     * @var string|null
-     */
-    protected ?string $label;
-
-    /**
-     * @var RequestInterface
-     */
-    protected RequestInterface $request;
-
-    /**
-     * @var TypeInstanceOptionsInterface
-     */
-    protected TypeInstanceOptionsInterface $typeInstanceOptions;
-
-    /**
-     * @var UrlInterface
-     */
-    protected UrlInterface $urlBuilder;
-
-    /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId
      * @param RequestInterface $request
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
@@ -63,19 +33,13 @@ class SwitchProfileFormButton implements ButtonProviderInterface
      * @param string|null $label
      */
     public function __construct(
-        GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
-        RequestInterface $request,
-        TypeInstanceOptionsInterface $typeInstanceOptions,
-        UrlInterface $urlBuilder,
-        ?string $fontName = null,
-        ?string $label = null
+        protected readonly GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
+        protected readonly RequestInterface $request,
+        protected readonly TypeInstanceOptionsInterface $typeInstanceOptions,
+        protected readonly UrlInterface $urlBuilder,
+        protected ?string $fontName = null,
+        protected ?string $label = null
     ) {
-        $this->getProfileDataByTypeId = $getProfileDataByTypeId;
-        $this->request = $request;
-        $this->typeInstanceOptions = $typeInstanceOptions;
-        $this->urlBuilder = $urlBuilder;
-        $this->fontName = $fontName;
-        $this->label = $label;
     }
 
     /**

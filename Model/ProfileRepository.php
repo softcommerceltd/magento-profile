@@ -16,38 +16,12 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use SoftCommerce\Profile\Api\Data\Profile\SearchResultsInterfaceFactory;
 use SoftCommerce\Profile\Api\ProfileRepositoryInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
-use SoftCommerce\Profile\Model\ResourceModel;
 
 /**
  * @inheritDoc
  */
 class ProfileRepository implements ProfileRepositoryInterface
 {
-    /**
-     * @var ResourceModel\Profile
-     */
-    private ResourceModel\Profile $resource;
-
-    /**
-     * @var ProfileFactory
-     */
-    private ProfileFactory $profileFactory;
-
-    /**
-     * @var ResourceModel\Profile\CollectionFactory
-     */
-    private ResourceModel\Profile\CollectionFactory $profileCollectionFactory;
-
-    /**
-     * @var SearchResultsInterfaceFactory
-     */
-    private SearchResultsInterfaceFactory $searchResultsFactory;
-
-    /**
-     * @var CollectionProcessorInterface
-     */
-    private CollectionProcessorInterface $collectionProcessor;
-
     /**
      * @param ResourceModel\Profile $resource
      * @param ProfileFactory $profileFactory
@@ -56,17 +30,12 @@ class ProfileRepository implements ProfileRepositoryInterface
      * @param CollectionProcessorInterface $collectionProcessor
      */
     public function __construct(
-        ResourceModel\Profile $resource,
-        ProfileFactory $profileFactory,
-        ResourceModel\Profile\CollectionFactory $profileCollectionFactory,
-        SearchResultsInterfaceFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor
+        private readonly ResourceModel\Profile $resource,
+        private readonly ProfileFactory $profileFactory,
+        private readonly ResourceModel\Profile\CollectionFactory $profileCollectionFactory,
+        private readonly SearchResultsInterfaceFactory $searchResultsFactory,
+        private readonly CollectionProcessorInterface $collectionProcessor
     ) {
-        $this->resource = $resource;
-        $this->profileFactory = $profileFactory;
-        $this->profileCollectionFactory = $profileCollectionFactory;
-        $this->searchResultsFactory = $searchResultsFactory;
-        $this->collectionProcessor = $collectionProcessor;
     }
 
     /**

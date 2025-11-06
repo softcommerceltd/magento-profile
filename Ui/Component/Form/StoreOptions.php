@@ -25,25 +25,13 @@ class StoreOptions implements OptionSourceInterface
     private ?array $options = null;
 
     /**
-     * @var StoreRepositoryInterface
-     */
-    private StoreRepositoryInterface $storeRepository;
-
-    /**
-     * @var WebsiteRepositoryInterface
-     */
-    private WebsiteRepositoryInterface $websiteRepository;
-
-    /**
      * @param StoreRepositoryInterface $storeRepository
      * @param WebsiteRepositoryInterface $websiteRepository
      */
     public function __construct(
-        StoreRepositoryInterface $storeRepository,
-        WebsiteRepositoryInterface $websiteRepository
+        private readonly StoreRepositoryInterface $storeRepository,
+        private readonly WebsiteRepositoryInterface $websiteRepository
     ) {
-        $this->storeRepository = $storeRepository;
-        $this->websiteRepository = $websiteRepository;
     }
 
     /**

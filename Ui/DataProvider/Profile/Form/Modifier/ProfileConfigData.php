@@ -16,7 +16,7 @@ use SoftCommerce\Profile\Model\RegistryLocatorInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPoolInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeInterfaceFactory;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc
@@ -50,11 +50,6 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
     private ?string $profileTypeId = null;
 
     /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
-
-    /**
      * @var array
      */
     private array $modifyDataRequest = [];
@@ -73,10 +68,9 @@ class ProfileConfigData extends AbstractModifier implements ModifierInterface
         RequestInterface $request,
         RegistryLocatorInterface $registryLocator,
         MetadataPoolInterface $metadataPool,
-        SerializerInterface $serializer
+        private readonly SerializerInterface $serializer
     ) {
         $this->configScope = $configScopeFactory->create(['data' => $request->getParams()]);
-        $this->serializer = $serializer;
         parent::__construct($arrayManager, $request, $registryLocator, $metadataPool);
     }
 

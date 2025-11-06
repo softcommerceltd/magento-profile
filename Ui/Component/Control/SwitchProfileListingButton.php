@@ -21,25 +21,13 @@ class SwitchProfileListingButton implements ButtonProviderInterface
     private const IMPORT = 'import';
 
     /**
-     * @var RequestInterface
-     */
-    protected RequestInterface $request;
-
-    /**
-     * @var UrlInterface
-     */
-    protected UrlInterface $urlBuilder;
-
-    /**
      * @param RequestInterface $request
      * @param UrlInterface $urlBuilder
      */
     public function __construct(
-        RequestInterface $request,
-        UrlInterface $urlBuilder
+        protected readonly RequestInterface $request,
+        protected readonly UrlInterface $urlBuilder
     ) {
-        $this->request = $request;
-        $this->urlBuilder = $urlBuilder;
     }
 
     /**

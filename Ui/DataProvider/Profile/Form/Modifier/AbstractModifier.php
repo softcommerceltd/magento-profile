@@ -13,7 +13,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Stdlib\ArrayManager;
 use SoftCommerce\Profile\Model\RegistryLocatorInterface;
 use SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPoolInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * Class AbstractModifier
@@ -21,26 +21,6 @@ use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
 class AbstractModifier
 {
     public const FORM_NAME = 'softcommerce_profile_form';
-
-    /**
-     * @var ArrayManager
-     */
-    protected ArrayManager $arrayManager;
-
-    /**
-     * @var RegistryLocatorInterface
-     */
-    protected RegistryLocatorInterface $registryLocator;
-
-    /**
-     * @var RequestInterface
-     */
-    protected RequestInterface $request;
-
-    /**
-     * @var MetadataPoolInterface
-     */
-    protected MetadataPoolInterface $metadataPool;
 
     /**
      * @var int|null
@@ -59,15 +39,11 @@ class AbstractModifier
      * @param MetadataPoolInterface $metadataPool
      */
     public function __construct(
-        ArrayManager $arrayManager,
-        RequestInterface $request,
-        RegistryLocatorInterface $registryLocator,
-        MetadataPoolInterface $metadataPool
+        protected readonly ArrayManager $arrayManager,
+        protected readonly RequestInterface $request,
+        protected readonly RegistryLocatorInterface $registryLocator,
+        protected readonly MetadataPoolInterface $metadataPool
     ) {
-        $this->arrayManager = $arrayManager;
-        $this->request = $request;
-        $this->registryLocator = $registryLocator;
-        $this->metadataPool = $metadataPool;
     }
 
     /**

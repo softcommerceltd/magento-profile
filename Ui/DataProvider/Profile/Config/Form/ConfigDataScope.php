@@ -11,18 +11,13 @@ namespace SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 
 /**
  * @inheritDoc
  */
 class ConfigDataScope implements ConfigDataScopeInterface
 {
-    /**
-     * @var ConfigScopeInterface
-     */
-    private ConfigScopeInterface $configScope;
-
     /**
      * @var string|null
      */
@@ -49,23 +44,16 @@ class ConfigDataScope implements ConfigDataScopeInterface
     private ?int $scopeId = null;
 
     /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
-
-    /**
      * @param ConfigScopeInterface $configScope
      * @param SerializerInterface $serializer
      * @param array $data
      * @throws \Exception
      */
     public function __construct(
-        ConfigScopeInterface $configScope,
-        SerializerInterface $serializer,
+        private readonly ConfigScopeInterface $configScope,
+        private readonly SerializerInterface $serializer,
         array $data = []
     ) {
-        $this->configScope = $configScope;
-        $this->serializer = $serializer;
         $this->init($data);
     }
 

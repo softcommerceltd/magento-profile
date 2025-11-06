@@ -20,16 +20,6 @@ use SoftCommerce\Profile\Model\ResourceModel\Profile\CollectionFactory;
 class InitialProfileDataProvider extends AbstractDataProvider
 {
     /**
-     * @var PoolInterface
-     */
-    private PoolInterface $pool;
-
-    /**
-     * @var UrlInterface
-     */
-    private UrlInterface $urlBuilder;
-
-    /**
      * @param CollectionFactory $collectionFactory
      * @param PoolInterface $pool
      * @param UrlInterface $urlBuilder
@@ -41,8 +31,8 @@ class InitialProfileDataProvider extends AbstractDataProvider
      */
     public function __construct(
         CollectionFactory $collectionFactory,
-        PoolInterface $pool,
-        UrlInterface $urlBuilder,
+        private readonly PoolInterface $pool,
+        private readonly UrlInterface $urlBuilder,
         string $name,
         string $primaryFieldName,
         string $requestFieldName,
@@ -50,8 +40,6 @@ class InitialProfileDataProvider extends AbstractDataProvider
         array $data = []
     ) {
         $this->collection = $collectionFactory->create();
-        $this->pool = $pool;
-        $this->urlBuilder = $urlBuilder;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 

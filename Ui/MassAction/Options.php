@@ -31,11 +31,6 @@ class Options implements \JsonSerializable
     private array $data;
 
     /**
-     * @var GetProfileDataByTypeIdInterface
-     */
-    private GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
-
-    /**
      * @var array|null
      */
     private ?array $options = null;
@@ -44,11 +39,6 @@ class Options implements \JsonSerializable
      * @var string|null
      */
     private ?string $paramName = null;
-
-    /**
-     * @var UrlInterface
-     */
-    private UrlInterface $urlBuilder;
 
     /**
      * @var string|null
@@ -66,12 +56,10 @@ class Options implements \JsonSerializable
      * @param array $data
      */
     public function __construct(
-        GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
-        UrlInterface $urlBuilder,
+        private readonly GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
+        private readonly UrlInterface $urlBuilder,
         array $data = []
     ) {
-        $this->getProfileDataByTypeId = $getProfileDataByTypeId;
-        $this->urlBuilder = $urlBuilder;
         $this->data = $data;
     }
 

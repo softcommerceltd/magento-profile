@@ -19,57 +19,21 @@ use Magento\Ui\Component\Control\Container;
 class ProfileMenuButton implements ButtonProviderInterface
 {
     /**
-     * @var string|null
-     */
-    protected ?string $aclResource;
-
-    /**
-     * @var array
-     */
-    private array $actionData;
-
-    /**
-     * @var RequestInterface
-     */
-    protected RequestInterface $request;
-
-    /**
-     * @var string|null
-     */
-    protected ?string $label;
-
-    /**
-     * @var int|null
-     */
-    protected ?int $sortOrder;
-
-    /**
-     * @var UrlInterface
-     */
-    protected UrlInterface $urlBuilder;
-
-    /**
      * @param RequestInterface $request
+     * @param UrlInterface $urlBuilder
      * @param array $actionData
      * @param string|null $aclResource
      * @param string|null $label
      * @param int|null $sortOrder
      */
     public function __construct(
-        RequestInterface $request,
-        UrlInterface $urlBuilder,
-        array $actionData,
-        ?string $aclResource = null,
-        ?string $label = null,
-        ?int $sortOrder = null
-    ) {
-        $this->request = $request;
-        $this->urlBuilder = $urlBuilder;
-        $this->actionData = $actionData;
-        $this->aclResource = $aclResource;
-        $this->label = $label;
-        $this->sortOrder = $sortOrder;
-    }
+        protected readonly RequestInterface $request,
+        protected readonly UrlInterface $urlBuilder,
+        protected array $actionData,
+        protected ?string $aclResource = null,
+        protected ?string $label = null,
+        protected ?int $sortOrder = null
+    ) {}
 
     /**
      * @inheritDoc
@@ -144,7 +108,8 @@ class ProfileMenuButton implements ButtonProviderInterface
             }
 
             if ($url) {
-                $result[$typeId]['onclick'] = $this->getOnclickUrl($url, $itemData['confirm'] ?? null);
+                $params = $itemData['params'] ?? [];
+                $result[$typeId]['onclick'] = $this->getOnclickUrl($url, $itemData['confirm'] ?? null, $params);
             }
 
             $i++;
@@ -171,16 +136,17 @@ class ProfileMenuButton implements ButtonProviderInterface
     /**
      * @param string $path
      * @param string|null $confirm
+     * @param array $params
      * @return string
      */
-    private function getOnclickUrl(string $path, ?string $confirm = null): string
+    private function getOnclickUrl(string $path, ?string $confirm = null, array $params = []): string
     {
         $message = null;
         if ($confirm) {
             $message = __($confirm);
         }
 
-        $url = $this->urlBuilder->getUrl($path);
+        $url = $this->urlBuilder->getUrl($path, $params);
 
         return $message
             ? "confirmSetLocation('$message', '$url')"

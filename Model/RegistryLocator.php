@@ -19,11 +19,6 @@ use SoftCommerce\Profile\Api\Data\ProfileInterface;
 class RegistryLocator implements RegistryLocatorInterface
 {
     /**
-     * @var Registry
-     */
-    private Registry $registry;
-
-    /**
      * @var ProfileInterface|null
      */
     private ?ProfileInterface $profile = null;
@@ -36,9 +31,9 @@ class RegistryLocator implements RegistryLocatorInterface
     /**
      * @param Registry $registry
      */
-    public function __construct(Registry $registry)
-    {
-        $this->registry = $registry;
+    public function __construct(
+        private readonly Registry $registry
+    ) {
     }
 
     /**
