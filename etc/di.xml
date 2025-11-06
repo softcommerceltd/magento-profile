@@ -15,7 +15,21 @@
     <preference for="SoftCommerce\Profile\Model\GetProfileDataInterface" type="SoftCommerce\Profile\Model\GetProfileData"/>
     <preference for="SoftCommerce\Profile\Model\GetProfileDataByTypeIdInterface" type="SoftCommerce\Profile\Model\GetProfileDataByTypeId"/>
     <preference for="SoftCommerce\Profile\Model\GetProfileTypeIdInterface" type="SoftCommerce\Profile\Model\GetProfileTypeId"/>
-    <preference for="SoftCommerce\Profile\Model\ServiceAbstract\CanProcessChainInterface" type="SoftCommerce\Profile\Model\ServiceAbstract\CanProcessChain"/>
+    <preference for="SoftCommerce\Profile\Model\ServiceAbstract\ProcessorGuardInterface" type="SoftCommerce\Profile\Model\ServiceAbstract\ProcessorGuard"/>
+    <!-- profile config ::: interface | repository | management -->
+    <preference for="SoftCommerce\Profile\Api\Data\ConfigInterface" type="SoftCommerce\Profile\Model\Config"/>
+    <preference for="SoftCommerce\Profile\Api\Data\ConfigSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="SoftCommerce\Profile\Api\ConfigRepositoryInterface" type="SoftCommerce\Profile\Model\ConfigRepository"/>
+    <preference for="SoftCommerce\Profile\Model\Config\ConfigScopeInterface" type="SoftCommerce\Profile\Model\Config\ConfigScope"/>
+    <preference for="SoftCommerce\Profile\Model\Config\ConfigScopeWriterInterface" type="SoftCommerce\Profile\Model\Config\ConfigScopeWriter"/>
+    <preference for="SoftCommerce\Profile\Model\Config\GetProfileConfigValueByPathInterface" type="SoftCommerce\Profile\Model\Config\GetProfileConfigValueByPath"/>
+    <preference for="SoftCommerce\Profile\Model\Config\GetProfileIdByConfigConditionInterface" type="SoftCommerce\Profile\Model\Config\GetProfileIdByConfigCondition"/>
+    <preference for="SoftCommerce\Profile\Model\ResourceModel\Config\GetConfigDataInterface" type="SoftCommerce\Profile\Model\ResourceModel\Config\GetConfigDataCache"/>
+    <!-- profile config type instance -->
+    <preference for="SoftCommerce\Profile\Model\Config\Type\EventConfigInterface" type="SoftCommerce\Profile\Model\Config\Type\EventConfig"/>
+    <preference for="SoftCommerce\Profile\Model\Config\Type\LogConfigInterface" type="SoftCommerce\Profile\Model\Config\Type\LogConfig"/>
+    <!-- Service Preferences -->
+    <preference for="SoftCommerce\Profile\Api\Service\PurgeProfileDataInterface" type="SoftCommerce\Profile\Model\Service\PurgeProfileData"/>
     <!-- profile types -->
     <preference for="SoftCommerce\Profile\Model\ProfileTypes\ConfigInterface" type="SoftCommerce\Profile\Model\ProfileTypes\Config"/>
     <virtualType name="SoftCommerce\Profile\Model\ProfileTypes\Config\Data" type="Magento\Framework\Config\Data">
@@ -45,6 +59,10 @@
             <argument name="config" xsi:type="object">SoftCommerce\Profile\Model\ProfileTypes\Config\Data</argument>
         </arguments>
     </type>
+    <!-- Profile UI metadata pool -->
+    <preference for="SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPoolInterface" type="SoftCommerce\Profile\Ui\DataProvider\Modifier\Form\MetadataPool"/>
+    <preference for="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeInterface" type="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScope"/>
+    <preference for="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeStorageInterface" type="SoftCommerce\Profile\Ui\DataProvider\Profile\Config\Form\ConfigDataScopeStorage"/>
     <!-- Profile UI list-->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
@@ -73,6 +91,15 @@
                     <item name="entityTableName" xsi:type="string">softcommerce_profile_entity</item>
                     <item name="identifierField" xsi:type="string">entity_id</item>
                 </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="profile_config_export" xsi:type="object">SoftCommerce\Profile\Console\Command\ExportConfigData</item>
+                <item name="profile_config_import" xsi:type="object">SoftCommerce\Profile\Console\Command\ImportConfigData</item>
+                <item name="profile_data_purge" xsi:type="object">SoftCommerce\Profile\Console\Command\PurgeProfileDataCommand</item>
             </argument>
         </arguments>
     </type>
