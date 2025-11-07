@@ -50,7 +50,16 @@ class PurgeProfileData implements PurgeProfileDataInterface
         $connection = $this->getConnection();
 
         try {
-            $connection->beginTransaction();
+            $useTransaction = $profileId !== null;
+
+            if ($useTransaction) {
+                $connection->beginTransaction();
+            }
+
+            // Disable foreign key checks to allow truncation of tables with FK constraints
+            if (!$useTransaction) {
+                $connection->query('SET FOREIGN_KEY_CHECKS = 0');
+            }
 
             foreach ($this->getTablesToPurge() as $tableName) {
                 $table = $this->resourceConnection->getTableName($tableName);
@@ -77,15 +86,34 @@ class PurgeProfileData implements PurgeProfileDataInterface
                         ));
                     }
                 } else {
+                    // TRUNCATE is DDL and cannot be used in transactions
+                    // It implicitly commits, so no transaction needed
                     $connection->truncateTable($table);
                     $this->logger->info(sprintf('Truncated table %s', $table));
                 }
             }
 
-            $connection->commit();
+            // Re-enable foreign key checks
+            if (!$useTransaction) {
+                $connection->query('SET FOREIGN_KEY_CHECKS = 1');
+            }
+
+            if ($useTransaction) {
+                $connection->commit();
+            }
+
             $this->logger->info('Profile data purge completed successfully.');
         } catch (\Exception $e) {
-            $connection->rollBack();
+            // Always re-enable foreign key checks in case of error
+            try {
+                $connection->query('SET FOREIGN_KEY_CHECKS = 1');
+            } catch (\Exception $fkException) {
+                $this->logger->error('Failed to re-enable foreign key checks: ' . $fkException->getMessage());
+            }
+
+            if (isset($useTransaction) && $useTransaction && $connection->getTransactionLevel() > 0) {
+                $connection->rollBack();
+            }
             $this->logger->error('Failed to purge profile data: ' . $e->getMessage());
             throw $e;
         }

@@ -21,8 +21,9 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  */
 class PurgeProfileDataCommand extends Command
 {
-    private const PROFILE_ID = 'profile-id';
-    private const FORCE = 'force';
+    private const string COMMAND_NAME = 'profile:data:purge';
+    private const string PROFILE_ID = 'profile-id';
+    private const string FORCE = 'force';
 
     /**
      * @param PurgeProfileDataInterface $purgeProfileData
@@ -40,7 +41,7 @@ class PurgeProfileDataCommand extends Command
      */
     protected function configure(): void
     {
-        $this->setName('profile:data:purge');
+        $this->setName(self::COMMAND_NAME);
         $this->setDescription('Purge data from softcommerce_* tables (except softcommerce_profile_entity)');
         $this->setDefinition([
             new InputOption(
@@ -94,7 +95,7 @@ HELP
             $message = $profileId
                 ? "Are you sure you want to purge all data for profile ID $profileId? This action cannot be undone. [y/N] "
                 : "Are you sure you want to purge ALL profile data? This action cannot be undone. [y/N] ";
-            $question = new ConfirmationQuestion($message, false);
+            $question = new ConfirmationQuestion("<fg=magenta>$message</>", false);
 
             if (!$helper->ask($input, $output, $question)) {
                 $output->writeln('<comment>Operation cancelled.</comment>');
