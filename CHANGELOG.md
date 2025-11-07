@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2025-11-07
+### BREAKING CHANGES
+- add PHP 8.3/8.4 compatibility and modernize profile module
+- refactor service architecture with ProcessorGuard pattern
+- introduce comprehensive configuration management system
+### Added
+- add configuration import/export and profile data management commands
+
 ## [2.0.2] - 2025-07-24
 ### Changed
 - The metapackage release notes are now properly extracting and formatting the module changes from the CHANGELOG.md file
