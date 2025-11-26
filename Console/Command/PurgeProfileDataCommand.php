@@ -21,9 +21,9 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  */
 class PurgeProfileDataCommand extends Command
 {
-    private const string COMMAND_NAME = 'profile:data:purge';
-    private const string PROFILE_ID = 'profile-id';
-    private const string FORCE = 'force';
+    private const COMMAND_NAME = 'profile:data:purge';
+    private const PROFILE_ID = 'profile-id';
+    private const FORCE = 'force';
 
     /**
      * @param PurgeProfileDataInterface $purgeProfileData
