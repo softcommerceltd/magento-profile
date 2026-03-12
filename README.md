@@ -5,5 +5,5 @@ Magento - SoftCommerce. Profile entity module.
 Used to manage profiles.
 
 ## Support
-Soft Commerce Ltd <br />
-support@softcommerce.co.uk
+Byte8 Ltd <br />
+support@byte8.io
