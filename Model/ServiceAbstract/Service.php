@@ -327,7 +327,7 @@ abstract class Service
      * @param int|string|null $key Optional key, returns all data if null
      * @return mixed Value for key, or all data array
      */
-    protected function getData($key = null): mixed
+    protected function getData(mixed $key = null): mixed
     {
         return null !== $key
             ? ($this->data[$key] ?? null)

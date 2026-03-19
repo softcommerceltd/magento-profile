@@ -57,7 +57,7 @@ class ProfileRepository implements ProfileRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function get($entityId, $field = null)
+    public function get(mixed $entityId, mixed $field = null)
     {
         /** @var ProfileInterface|Profile $profile */
         $profile = $this->profileFactory->create();

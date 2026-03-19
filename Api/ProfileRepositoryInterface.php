@@ -33,7 +33,7 @@ interface ProfileRepositoryInterface
      * @return Data\ProfileInterface
      * @throws NoSuchEntityException
      */
-    public function get($entityId, $field = null);
+    public function get(mixed $entityId, mixed $field = null);
 
     /**
      * @param int $profileId
